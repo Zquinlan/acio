@@ -1,0 +1,9 @@
+import argparse
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('infile', help = 'csv_dataframe')
+parser.add_argument('sample_column', help = 'what is the name of the sample_column')
+args = parser.parse_args()
+
+mkdir infile_io 
