@@ -83,6 +83,8 @@ class mainWindow(QMainWindow):
     
     def makeclick(self):
         currentDirectory = self.searchDirectory.text()
+
+        #Errors out if not directory is selected
         if currentDirectory == "Your Github Repository":
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)
 
