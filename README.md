@@ -1,5 +1,5 @@
-# Academia_to_io
-Insert creative tool name for repo above...
+# Academia_to_io (Ac.Io Website)
+
 
 
 ## We are designing a command line tool which will generate a jekyll based io website
