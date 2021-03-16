@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import pyqtSlot, QDir, Qt, QSize
 
+
 class themeScroll(QScrollArea):
     def __init__ (self):
         super().__init__()
@@ -51,7 +52,6 @@ class themeScroll(QScrollArea):
 
 
 
-
 class dirSearch(QWidget):
     def __init__(self):
         super().__init__()
@@ -82,7 +82,6 @@ class dirSearch(QWidget):
 
         if os.path.isdir(fname):
             self.searchDirectory.setText(fname)
-
 
 
 
@@ -120,14 +119,92 @@ class fileSearch(QWidget):
 
 
 
-
-class gPhotosPop(QDialog): # Maybe this should be optional between a file or google photos
-    def __init__(self, parent = None): # Need to get current album responses. Import from mainWindow (make parent?)
+class socialPop(QDialog):
+    def __init__(self, parent = None):
         super().__init__(parent)
 
-        self.initUI()
+        self.layout = QVBoxLayout()
+        self.layout.setSpacing(20)
 
-    def initUI(self):
+        #Twitter label and link
+        self.twitterLabel = QLabel(self)
+        self.twitterLabel.setText("Twitter handle")
+        self.twitterLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.twitterLink = QLineEdit(self)
+        self.twitterLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #Github
+        self.githubLabel = QLabel(self)
+        self.githubLabel.setText("Github handle")
+        self.githubLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.githubLink = QLineEdit(self)
+        self.githubLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #Research Gate
+        self.researchgateLabel = QLabel(self)
+        self.researchgateLabel.setText("ResearchGate profile")
+        self.researchgateLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.researchgateLink = QLineEdit(self)
+        self.researchgateLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        # ORC ID
+        self.orcidLabel = QLabel(self)
+        self.orcidLabel.setText('OrcID Number')
+        self.orcidLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.orcidLink = QLineEdit(self)
+        self.orcidLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        # Personal Wesbite
+        self.personalLabel = QLabel(self)
+        self.personalLabel.setText('Personal Website Address')
+        self.personalLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.personalLink = QLineEdit(self)
+        self.personalLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #set placeholder text
+        self.twitterLink.setPlaceholderText('E.G. @Zquinlan')
+        self.githubLink.setPlaceholderText('E.G. Zquinlan')
+        self.researchgateLink.setPlaceholderText('E.G. Zachary-Quinlan')
+        self.orcidLink.setPlaceholderText('E.G. 0000-0002-0351-8927')
+        self.personalLink.setPlaceholderText('E.G. www.zquinlan.com')
+
+        # Save Button
+        self.save = QPushButton("Save", self)
+        self.save.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.save.clicked.connect(self.closeClick)
+
+
+        #Add all widgets to layout
+        self.layout.addWidget(self.twitterLabel)
+        self.layout.addWidget(self.twitterLink)
+        self.layout.addWidget(self.githubLabel)
+        self.layout.addWidget(self.githubLink)
+        self.layout.addWidget(self.researchgateLabel)
+        self.layout.addWidget(self.researchgateLink)
+        self.layout.addWidget(self.orcidLabel)
+        self.layout.addWidget(self.orcidLink)
+        self.layout.addWidget(self.personalLabel)
+        self.layout.addWidget(self.personalLink)
+        self.layout.addWidget(self.save)
+
+        self.setLayout(self.layout)
+        self.setGeometry(0, 0, 500, 400)
+
+    @pyqtSlot()
+    def closeClick(self):
+        self.close()
+
+
+
+
+class gPhotosPop(QDialog):
+    def __init__(self, parent = None):
+        super().__init__(parent)
 
         self.layout = QVBoxLayout()
         self.layout.setSpacing(20)
@@ -161,7 +238,6 @@ class gPhotosPop(QDialog): # Maybe this should be optional between a file or goo
         self.localLogoLine = fileSearch()
         self.localLogoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         
-
         #Label for google album
         self.localPhotoLabel = QLabel(self)
         self.localPhotoLabel.setText("Local Photo Album:")
@@ -171,6 +247,11 @@ class gPhotosPop(QDialog): # Maybe this should be optional between a file or goo
         self.localPhotoLine = dirSearch()
         self.localPhotoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
+        #Set placeholder text
+        self.localLogoLine.searchDirectory.setPlaceholderText('Find Picture')
+        self.localPhotoLine.searchDirectory.setPlaceholderText('Find Album Folder')
+        self.gLogoLine.setPlaceholderText('Copy + Paste Link Here')
+        self.gPhotoLine.setPlaceholderText('Copy + Paste Link Here')
 
         # Error label
         self.noPhotos = QLabel(self)
@@ -202,12 +283,12 @@ class gPhotosPop(QDialog): # Maybe this should be optional between a file or goo
         self.close()
 
 
+
+
 class mainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = 'Ac.Io'
-        self.left = 0
-        self.top = 0
         self.geometry = app.desktop().availableGeometry()
         self.height = self.geometry.height()
         self.width = self.geometry.height()
@@ -222,6 +303,7 @@ class mainWindow(QMainWindow):
         self.createMenuBar()
         self.initUI()
 
+
     def createMenuBar(self):
         # Making the Menu bar
         mainMenu = self.menuBar()
@@ -229,48 +311,47 @@ class mainWindow(QMainWindow):
 
         fileMenu = mainMenu.addMenu('File')
         editMenu = mainMenu.addMenu('Edit')
-        viewMenu = mainMenu.addMenu('View')
         helpMenu = mainMenu.addMenu('Help')
 
         # File Actions
-        self.closeButton = QAction('&Close Window', self)
-        self.quitButton = QAction('&Quit Application', self)
+        closeButton = QAction('Close Window', self)
+        quitButton = QAction('Quit Application', self)
         
         # Edit Actions
-        self.copyButton = QAction('&Copy', self)
-        self.cutButton = QAction('&Cut', self)
-        self.pasteButton = QAction('&Paste', self)
+        copyButton = QAction('Copy', self)
+        cutButton = QAction('Cut', self)
+        pasteButton = QAction('Paste', self)
 
         # Shortcuts and actions
-        self.closeButton.setShortcut(self.key + '+W')
+        closeButton.setShortcut(self.key + '+W')
         # self.closeButton.triggered.connect(self.close)
 
-        self.quitButton.setShortcut(self.key + '+Q')
-        self.quitButton.triggered.connect(self.quit)
+        quitButton.setShortcut(self.key + '+Q')
+        quitButton.triggered.connect(self.quit)
 
-        self.copyButton.setShortcut(self.key + '+C')
+        copyButton.setShortcut(self.key + '+C')
         # self.copyButton.triggered.connect(self.copy)
 
-        self.cutButton.setShortcut(self.key + '+X')
+        cutButton.setShortcut(self.key + '+X')
         # self.cutButton.triggered.connect(self.cut)
 
-        self.pasteButton.setShortcut(self.key + '+V')
+        pasteButton.setShortcut(self.key + '+V')
         # self.pasteButton.triggered.connect(self.paste)
 
 
         # Add actions to menuBar
-        fileMenu.addAction(self.closeButton)
-        fileMenu.addAction(self.quitButton)
+        fileMenu.addAction(closeButton)
+        fileMenu.addAction(quitButton)
 
-        editMenu.addAction(self.copyButton)
-        editMenu.addAction(self.cutButton)
-        editMenu.addAction(self.pasteButton)
+        editMenu.addAction(copyButton)
+        editMenu.addAction(cutButton)
+        editMenu.addAction(pasteButton)
 
 
     def initUI(self):
         # Setting Window Geometry
         self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setGeometry(0, 0, 700, 500)
 
         #Defining scroll area
         scroll = QScrollArea()
@@ -281,13 +362,33 @@ class mainWindow(QMainWindow):
         # Adding Widgets
         # Directory Selection
         self.dir = dirSearch()
-        self.dir.searchDirectory.setText("Your Github Repository")
+        self.dir.searchDirectory.setPlaceholderText("Your Github Repository")
         layout.addWidget(self.dir)
 
         # Theme selection
         self.themeSelect = themeScroll()
         self.themeSelect.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         layout.addWidget(self.themeSelect)
+
+        # DOI addition widget
+        self.doi = QWidget()
+        doiLayout = QHBoxLayout(self.doi)
+        doiLayout.setContentsMargins(0,0,0,0)
+
+        self.doiLabel = QLabel(self)
+        self.doiLabel.setText("DOI Number:")
+        self.doiLabel.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+
+        self.doiLink = QLineEdit(self)
+        self.doiLink.setFixedWidth(250)
+        self.doiLink.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.doiLink.setPlaceholderText("E.G. 10.3389/fmicb.2019.02397")
+
+        doiLayout.setAlignment(Qt.AlignLeft)
+        doiLayout.addWidget(self.doiLabel)
+        doiLayout.addWidget(self.doiLink)
+        
+        layout.addWidget(self.doi)
 
         # Add README button
         self.readMe = QCheckBox(self)
@@ -313,16 +414,29 @@ class mainWindow(QMainWindow):
         self.gPhotosButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.gPhotosButton.clicked.connect(self.photosClick)
 
-        self.gLogoLink = "Copy + Paste Link Here"
-        self.gAlbumLink = "Copy + Paste Link Here"
-        self.localLogoLink = 'Find Picture'
-        self.localAlbumLink = 'Find Album Folder'
+        self.gLogoLink = ''
+        self.gAlbumLink = ''
+        self.localLogoLink = ''
+        self.localAlbumLink = ''
 
         photosLayout.setAlignment(Qt.AlignLeft)
         photosLayout.addWidget(self.gPhotosButton)
 
         #Add photos layout to page
         layout.addWidget(self.photos)
+
+        #Adding social media buttons
+        self.socialButton = QPushButton("Social Media Handles (Optional)", self)
+        self.socialButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.socialButton.clicked.connect(self.socialClick)
+
+        self.twitterHandle = ''
+        self.githubHandle = ''
+        self.researchgateHandle = ''
+        self.orcidHandle = ''
+        self.personalWeb = ''
+
+        layout.addWidget(self.socialButton)
 
         # Make website button
         self.mkFramework = QPushButton("Acio Website", self)
@@ -335,16 +449,21 @@ class mainWindow(QMainWindow):
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
 
+
     @pyqtSlot()
     def quit(self):
         sys.exit()
+
 
     def photosClick(self):
         self.popout = gPhotosPop()
 
         if self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
-            self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
-            self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
+            # Set placeholder text if no user input; Set regular text if user input previously supplied
+            if not self.localLogoLink == '':
+                self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
+            if not self.localAlbumLink == '':
+                self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
 
             self.popout.gLogoLabel.hide()
             self.popout.gLogoLine.hide()
@@ -354,9 +473,11 @@ class mainWindow(QMainWindow):
 
 
         if self.googlePhotos.isChecked() and not self.localPhotos.isChecked():
-            self.popout.gLogoLine.setText(self.gLogoLink)
-            self.popout.gPhotoLine.setText(self.gAlbumLink)
-
+            # Set placeholder text if no user input; Set regular text if user input previously supplied
+            if not self.gLogoLink == '':
+                self.popout.gLogoLine.setText(self.gLogoLink)
+            if not self.gAlbumLink == '':
+                self.popout.gPhotoLine.setText(self.gAlbumLink)
 
             self.popout.localLogoLabel.hide()
             self.popout.localLogoLine.hide()
@@ -365,10 +486,16 @@ class mainWindow(QMainWindow):
             self.popout.noPhotos.hide()
 
         if self.googlePhotos.isChecked() and self.localPhotos.isChecked():
-            self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
-            self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
-            self.popout.gLogoLine.setText(self.gLogoLink)
-            self.popout.gPhotoLine.setText(self.gAlbumLink)
+            # Set placeholder text if no user input; Set regular text if user input previously supplied
+            if not self.localLogoLink == '':
+                self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
+            if not self.localAlbumLink == '':
+                self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
+            if not self.gLogoLink == '':
+                self.popout.gLogoLine.setText(self.gLogoLink)
+            if not self.gAlbumLink == '':
+                self.popout.gPhotoLine.setText(self.gAlbumLink)
+
 
             self.popout.noPhotos.hide()
 
@@ -385,16 +512,53 @@ class mainWindow(QMainWindow):
 
         # Retrieve line text when closed
         self.popout.exec_()
-        self.gLogoLink = self.popout.gLogoLine.text()
-        self.gAlbumLink = self.popout.gPhotoLine.text()
-        self.localLogoLink = self.popout.localLogoLine.searchDirectory.text()
-        self.localAlbumLink = self.popout.localPhotoLine.searchDirectory.text()
+
+        # If the QLineEdits have been changed it will redefine the links to user input
+        if not self.popout.localLogoLine.searchDirectory.text() == '':
+            self.localLogoLink = self.popout.localLogoLine.searchDirectory.text()
+        if not self.popout.localPhotoLine.searchDirectory.text() == '':
+            self.localAlbumLink = self.popout.localPhotoLine.searchDirectory.text()
+
+        if not self.popout.gLogoLine.text() == '':
+            self.gLogoLink = self.popout.gLogoLine.text()
+        if not self.popout.gPhotoLine.text() == '':
+            self.gAlbumLink = self.popout.gPhotoLine.text()
+
+
+    def socialClick(self):
+        self.social = socialPop()
+
+        if not self.twitterHandle == '':
+             self.social.twitterLink.setText(self.twitterHandle)
+        if not self.githubHandle == '':
+            self.social.githubLink.setText(self.githubHandle)
+        if not self.researchgateHandle == '':
+            self.social.researchgateLink.setText(self.researchgateHandle)
+        if not self.orcidHandle == '':
+            self.social.orcidLink.setText(self.orcidHandle)
+        if not self.personalWeb == '':
+            self.social.personalLink.setText(self.personalWeb)
+
+
+
+        self.social.exec_()
+        if not self.social.twitterLink.text() == '':
+            self.twitterHandle = self.social.twitterLink.text()
+        if not self.social.githubLink.text() == '':
+            self.githubHandle = self.social.githubLink.text()
+        if not self.social.researchgateLink.text() == '':
+            self.researchgateHandle = self.social.researchgateLink.text()
+        if not self.social.orcidLink.text() == '':
+            self.orcidHandle = self.social.orcidLink.text()
+        if not self.social.personalLink.text() == '':
+            self.personalWeb = self.social.personalLink.text()
+
 
     def makeClick(self):
         currentDirectory = self.dir.searchDirectory.text()
 
         #Errors out if not directory is selected
-        if currentDirectory == 'Your Github Repository': #change this to ask is it a dir
+        if currentDirectory == '': #change this to ask is it a dir
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)
 
         else: 
