@@ -1,0 +1,11 @@
+minmalMistakesYmlEdit
+
+change minimal_mistakes_skin = "contrast" mint or dark
+
+Add name
+delete description
+add repository link
+
+
+mkdir assets/images
+add logo to assets/images/

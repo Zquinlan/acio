@@ -20,7 +20,7 @@ class themeScroll(QScrollArea):
         radioButtonLayout.setSpacing(20)
         radioButtonLayout.setContentsMargins(0,0,0,20)
 
-        themes = ["Minimal", "Gridster", "Millennial", "Alembic", "Bulma"]
+        themes = ["Minimal", "Gridster", "Millennial", "Alembic", "Bulma"] #Minimal dark contrast and mint themes?
         col = 0
 
 
@@ -166,12 +166,21 @@ class socialPop(QDialog):
         self.personalLink = QLineEdit(self)
         self.personalLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
+        # Email
+        self.emailLable = QLabel(self)
+        self.emailLable.setText('Email Address')
+        self.emailLable.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        self.emailLink = QLineEdit(self)
+        self.emailLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
         #set placeholder text
         self.twitterLink.setPlaceholderText('E.G. @Zquinlan')
         self.githubLink.setPlaceholderText('E.G. Zquinlan')
         self.researchgateLink.setPlaceholderText('E.G. Zachary-Quinlan')
         self.orcidLink.setPlaceholderText('E.G. 0000-0002-0351-8927')
         self.personalLink.setPlaceholderText('E.G. www.zquinlan.com')
+        self.emailLink.setPlaceholderText('E.G. Zquinlan@Gmail.com')
 
         # Save Button
         self.save = QPushButton("Save", self)
@@ -190,10 +199,12 @@ class socialPop(QDialog):
         self.layout.addWidget(self.orcidLink)
         self.layout.addWidget(self.personalLabel)
         self.layout.addWidget(self.personalLink)
+        self.layout.addWidget(self.emailLable)
+        self.layout.addWidget(self.emailLink)
         self.layout.addWidget(self.save)
 
         self.setLayout(self.layout)
-        self.setGeometry(0, 0, 500, 400)
+        self.setGeometry(0, 0, 500, 450)
 
     @pyqtSlot()
     def closeClick(self):
@@ -360,6 +371,12 @@ class mainWindow(QMainWindow):
         layout.setAlignment(Qt.AlignTop)
 
         # Adding Widgets
+        # Website Title:
+        self.titleLine = QLineEdit(self)
+        self.titleLine.setPlaceholderText("Enter Your Websites Title")
+        self.titleLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        layout.addWidget(self.titleLine)
+
         # Directory Selection
         self.dir = dirSearch()
         self.dir.searchDirectory.setPlaceholderText("Your Github Repository")
@@ -393,6 +410,7 @@ class mainWindow(QMainWindow):
         # Add README button
         self.readMe = QCheckBox(self)
         self.readMe.setText("Use README as main page?")
+        self.readMe.setChecked(True)
         layout.addWidget(self.readMe)
 
         #Photos layout
@@ -410,7 +428,7 @@ class mainWindow(QMainWindow):
         photosLayout.addWidget(self.googlePhotos)
 
         # Google Photos pop out
-        self.gPhotosButton = QPushButton("Google Photos (Optional)", self)
+        self.gPhotosButton = QPushButton("Add Photos (Optional)", self)
         self.gPhotosButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.gPhotosButton.clicked.connect(self.photosClick)
 
@@ -435,11 +453,15 @@ class mainWindow(QMainWindow):
         self.researchgateHandle = ''
         self.orcidHandle = ''
         self.personalWeb = ''
+        self.emailHandle = ''
 
         layout.addWidget(self.socialButton)
 
         # Make website button
+        acioIcon = QIcon('Acio_design_v0.01.png')
         self.mkFramework = QPushButton("Acio Website", self)
+        self.mkFramework.setIcon(acioIcon)
+        self.mkFramework.setIconSize(QSize(30,30))
         self.mkFramework.clicked.connect(self.makeClick)
         self.mkFramework.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         layout.addWidget(self.mkFramework)
@@ -538,6 +560,8 @@ class mainWindow(QMainWindow):
             self.social.orcidLink.setText(self.orcidHandle)
         if not self.personalWeb == '':
             self.social.personalLink.setText(self.personalWeb)
+        if not self.emailHandle == '':
+            self.social.emailLink.setText(self.emailHandle)
 
 
 
@@ -552,6 +576,8 @@ class mainWindow(QMainWindow):
             self.orcidHandle = self.social.orcidLink.text()
         if not self.social.personalLink.text() == '':
             self.personalWeb = self.social.personalLink.text()
+        if not self.social.emailLink.text() == '':
+            self.emailHandle = self.social.emailLink.text()
 
 
     def makeClick(self):
