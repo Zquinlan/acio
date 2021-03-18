@@ -1,10 +1,19 @@
 import sys, os
-
 import qdarkstyle
-from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import pyqtSlot, QDir, Qt, QSize
+from edit_minimal_mistakes import editConfig, editNavigation
+from create_jekyll import editTheme
+
+#Things to add:
+#   Minimal theme optional colors
+#   Github sign in authentication?
+#   Bio photo
+
+#   Probably have to make photos either local or google for now radio buttons
+    # Best way will code radio buttons to change a variable (photoChoice = ) gphoto or localphoto
+    # Then an if statement in the slot for mkframework checking photoChoice and setting photoAlbum
 
 
 class themeScroll(QScrollArea):
@@ -27,6 +36,9 @@ class themeScroll(QScrollArea):
         for theme in themes:
             self.themeSelect = QRadioButton(theme)
             self.themeSelect.theme = theme
+            # if self.themeSelect.theme == 'Minimal':
+            #     self.themeSelect.setChecked(True)
+
             self.themeSelect.toggled.connect(self.onClicked)
 
             self.themeImage = QLabel(theme)
@@ -39,15 +51,15 @@ class themeScroll(QScrollArea):
 
             col += 1
 
+
+
         self.setWidget(radioButtonContent)
         self.setWidgetResizable(True)
 
     @pyqtSlot()
     def onClicked(self):
-        themeSelected = self.sender()
+        self.themeSelected = self.sender()
 
-        if themeSelected.isChecked():
-            print("Theme is %s" % (themeSelected.theme)) # This needs to change
 
 
 
@@ -258,9 +270,19 @@ class gPhotosPop(QDialog):
         self.localPhotoLine = dirSearch()
         self.localPhotoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
+        #Label for avatar picture
+        self.localAvatarLabel = QLabel(self)
+        self.localAvatarLabel.setText("Photo of author from local:")
+        self.localAvatarLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #Album link line edit
+        self.localAvatarLine = fileSearch()
+        self.localAvatarLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
         #Set placeholder text
         self.localLogoLine.searchDirectory.setPlaceholderText('Find Picture')
         self.localPhotoLine.searchDirectory.setPlaceholderText('Find Album Folder')
+        self.localAvatarLine.searchDirectory.setPlaceholderText('Find Picture')
         self.gLogoLine.setPlaceholderText('Copy + Paste Link Here')
         self.gPhotoLine.setPlaceholderText('Copy + Paste Link Here')
 
@@ -278,6 +300,8 @@ class gPhotosPop(QDialog):
         self.layout.addWidget(self.localLogoLine)
         self.layout.addWidget(self.localPhotoLabel)
         self.layout.addWidget(self.localPhotoLine)
+        self.layout.addWidget(self.localAvatarLabel)
+        self.layout.addWidget(self.localAvatarLine)
         self.layout.addWidget(self.gLogoLabel)
         self.layout.addWidget(self.gLogoLine)
         self.layout.addWidget(self.gPhotoLabel)
@@ -362,7 +386,7 @@ class mainWindow(QMainWindow):
     def initUI(self):
         # Setting Window Geometry
         self.setWindowTitle(self.title)
-        self.setGeometry(0, 0, 700, 500)
+        self.setGeometry(0, 0, 700, 700)
 
         #Defining scroll area
         scroll = QScrollArea()
@@ -376,6 +400,12 @@ class mainWindow(QMainWindow):
         self.titleLine.setPlaceholderText("Enter Your Websites Title")
         self.titleLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         layout.addWidget(self.titleLine)
+
+        #Author name:
+        self.authorLine = QLineEdit(self)
+        self.authorLine.setPlaceholderText("Your Name")
+        self.authorLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        layout.addWidget(self.authorLine)
 
         # Directory Selection
         self.dir = dirSearch()
@@ -436,6 +466,7 @@ class mainWindow(QMainWindow):
         self.gAlbumLink = ''
         self.localLogoLink = ''
         self.localAlbumLink = ''
+        self.localAvatarLink = ''
 
         photosLayout.setAlignment(Qt.AlignLeft)
         photosLayout.addWidget(self.gPhotosButton)
@@ -486,6 +517,8 @@ class mainWindow(QMainWindow):
                 self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
             if not self.localAlbumLink == '':
                 self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
+            if not self.localAvatarLink == '':
+                self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
 
             self.popout.gLogoLabel.hide()
             self.popout.gLogoLine.hide()
@@ -540,6 +573,8 @@ class mainWindow(QMainWindow):
             self.localLogoLink = self.popout.localLogoLine.searchDirectory.text()
         if not self.popout.localPhotoLine.searchDirectory.text() == '':
             self.localAlbumLink = self.popout.localPhotoLine.searchDirectory.text()
+        if not self.popout.localAvatarLine.searchDirectory.text() == '':
+            self.localAvatarLink = self.popout.localAvatarLine.searchDirectory.text()
 
         if not self.popout.gLogoLine.text() == '':
             self.gLogoLink = self.popout.gLogoLine.text()
@@ -582,12 +617,48 @@ class mainWindow(QMainWindow):
 
     def makeClick(self):
         currentDirectory = self.dir.searchDirectory.text()
+        
 
-        #Errors out if not directory is selected
-        if currentDirectory == '': #change this to ask is it a dir
+        # if self.photoSource == 'local': # This needs to strip the logolink to just the end/
+        self.absoluteLogoLink = self.localLogoLink
+        self.absoluteAvatarLink = self.localAvatarLink
+        self.absoluteAlbumLink = self.localAlbumLink
+
+        self.assetsAvatarLink = str('assets/images/' + self.absoluteAvatarLink.strip('/')[-1])
+        self.assetsLogoLink = str('assets/images/' + self.absoluteLogoLink.strip('/')[-1])
+        # self.assetsAlbumLink = str('assets/images/' + self.absoluteAlbumLink.strip('/')[-1])
+        self.assetsAlbumLink = self.localAlbumLink
+
+        # if self.photoSource == 'google':
+            # self.absoluteLogoLink = self.gLogoLink
+            # self.absoluteAlbumLink = self.gAlbumLink
+
+        #Need an if statement for creating name of theme
+
+        configArgs = {'currentDirectory' : currentDirectory,'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'logo' : self.assetsLogoLink,  'avatar' : self.assetsAvatarLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'skin' : 'mint'} 
+        navArgs = {'currentDirectory' : currentDirectory, 'doi' : self.doiLink.text(), 'photoAlbum' : self.assetsAlbumLink}
+        createArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'logo' : self.absoluteLogoLink, 'album' : self.absoluteAlbumLink, 'avatar' : self.absoluteAlbumLink} 
+
+        # For testing purposes use the args lines below
+        # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
+        # navArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'doi' : '10.3389/fmicb.2019.02397', 'photoAlbum' : ''}
+        # createArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'theme' : 'Minimal', 'logo' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes/assets/images/Coral_blue_tiny_fish_1.jpg', 'album' : '', 'avatar' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes//assets/images/zaq2020.jpg'} 
+
+        # Need some way to pick between google photos and local
+        # This needs to change and avatar option needs to be added 
+        # When themes have been fixed skin = self.themeSelect.theme
+
+        # #Errors out if not directory is selected
+        if not os.path.isdir(currentDirectory):
+
+            self.mkClone = editTheme(args = createArgs)
+            self.mkConfig = editConfig(args = configArgs)
+            self.mkNavigation = editNavigation(args = navArgs)
+
+
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)
 
-        else: 
+        if os.path.isdir(currentDirectory): 
             for root, dirs, files in os.walk(currentDirectory):
                 files = [f for f in files if not f[0] == '.']
                 dirs[:] = [d for d in dirs if not d[0] == '.']
@@ -597,6 +668,10 @@ class mainWindow(QMainWindow):
                 subindent = ' ' * 4 * (level + 1)
                 for f in files:
                     print('{}{}'.format(subindent, f) + '\n')
+
+            self.mkClone = editTheme(args = createArgs)
+            self.mkConfig = editConfig(args = configArgs)
+            self.mkNavigation = editNavigation(args = navArgs)
 
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
 
