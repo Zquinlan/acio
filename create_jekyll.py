@@ -48,9 +48,11 @@ class editTheme():
         subprocess.run(['rm', '-rf', self.themeClone])
 
         subprocess.run(['mkdir', 'assets/images'])
+        subprocess.run(['mkdir', 'assets/images/album']) #Need to create md file for this
+
         subprocess.run(['cp', self.logo, 'assets/images/'])
         subprocess.run(['cp', self.avatar, 'assets/images/'])
-        subprocess.run(['cp', self.album, 'assets/images/'])
+        subprocess.run(['cp -R', self.album, 'assets/images/album/']) # Cannot copy this
         subprocess.run(['mv', '_config.yml', '_config_template.yml'])
         subprocess.run(['mv', '_data/navigation.yml', '_data/navigation_template.yml'])
         subprocess.run(['mv', 'LICENSE', 'theme_LICENSE'])      
@@ -59,12 +61,15 @@ class editTheme():
         #Copy in pages and images for acio
         #Index file for mainpage of website
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/index.md', '.'])
-        indexin = open('index.md', 'a+')
-        readin = open('README.md', 'r')
 
-        # Adding the readme to the end of the index file and closeing both
-        indexin.write(readin.read())
-        indexin.close()
+        readin = open('README.md', 'r')
+        with open('index.md', 'a+') as fin:
+            # Adding the readme to the end of the index file and closeing both
+            for line in fin: 
+                if 'overlay_image' in line: #This still does not work
+                    fin.write(str(' assets/images/' + os.path.basename(self.logo))) # try tomorrow
+            fin.write(readin.read())
+        
         readin.close()
 
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/home.html', '_layouts/home.html'])
@@ -76,17 +81,3 @@ class editTheme():
         # with open('Gemfile', 'r+') as fin:
         #     for line in fin:
         #         if line.startswith('source "https://rubygems.org"'):
-
-
-
-# class editContents():
-#     def __init__(self, args):
-#         super().__init__()
-
-
-
-#For testing purposes
-
-# if __name__ == '__main__':
-#     createArgs = {'currentDirectory' :  '/Users/zacharyquinlan/Documents/temp/', 'theme' : 'minimal'} 
-#     editTheme(args = createArgs)

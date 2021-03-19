@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import pyqtSlot, QDir, Qt, QSize
 from edit_minimal_mistakes import editConfig, editNavigation
 from create_jekyll import editTheme
+from create_md import editContents
 
 #Things to add:
 #   Minimal theme optional colors
@@ -386,7 +387,7 @@ class mainWindow(QMainWindow):
     def initUI(self):
         # Setting Window Geometry
         self.setWindowTitle(self.title)
-        self.setGeometry(0, 0, 700, 700)
+        self.setGeometry(0, 0, 700, 600)
 
         #Defining scroll area
         scroll = QScrollArea()
@@ -511,14 +512,22 @@ class mainWindow(QMainWindow):
     def photosClick(self):
         self.popout = gPhotosPop()
 
+        # Set placeholder text if no user input; Set regular text if user input previously supplied
+        if not self.localLogoLink == '':
+            self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
+        if not self.localAlbumLink == '':
+            self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
+        if not self.localAvatarLink == '':
+            self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
+
+        if not self.gLogoLink == '':
+            self.popout.gLogoLine.setText(self.gLogoLink)
+        if not self.gAlbumLink == '':
+            self.popout.gPhotoLine.setText(self.gAlbumLink)
+
+
         if self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
-            # Set placeholder text if no user input; Set regular text if user input previously supplied
-            if not self.localLogoLink == '':
-                self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
-            if not self.localAlbumLink == '':
-                self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
-            if not self.localAvatarLink == '':
-                self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
+
 
             self.popout.gLogoLabel.hide()
             self.popout.gLogoLine.hide()
@@ -528,11 +537,6 @@ class mainWindow(QMainWindow):
 
 
         if self.googlePhotos.isChecked() and not self.localPhotos.isChecked():
-            # Set placeholder text if no user input; Set regular text if user input previously supplied
-            if not self.gLogoLink == '':
-                self.popout.gLogoLine.setText(self.gLogoLink)
-            if not self.gAlbumLink == '':
-                self.popout.gPhotoLine.setText(self.gAlbumLink)
 
             self.popout.localLogoLabel.hide()
             self.popout.localLogoLine.hide()
@@ -541,17 +545,6 @@ class mainWindow(QMainWindow):
             self.popout.noPhotos.hide()
 
         if self.googlePhotos.isChecked() and self.localPhotos.isChecked():
-            # Set placeholder text if no user input; Set regular text if user input previously supplied
-            if not self.localLogoLink == '':
-                self.popout.localLogoLine.searchDirectory.setText(self.localLogoLink)
-            if not self.localAlbumLink == '':
-                self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
-            if not self.gLogoLink == '':
-                self.popout.gLogoLine.setText(self.gLogoLink)
-            if not self.gAlbumLink == '':
-                self.popout.gPhotoLine.setText(self.gAlbumLink)
-
-
             self.popout.noPhotos.hide()
 
         if not self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
@@ -624,9 +617,9 @@ class mainWindow(QMainWindow):
         self.absoluteAvatarLink = self.localAvatarLink
         self.absoluteAlbumLink = self.localAlbumLink
 
-        self.assetsAvatarLink = str('assets/images/' + self.absoluteAvatarLink.strip('/')[-1])
-        self.assetsLogoLink = str('assets/images/' + self.absoluteLogoLink.strip('/')[-1])
-        # self.assetsAlbumLink = str('assets/images/' + self.absoluteAlbumLink.strip('/')[-1])
+        self.assetsAvatarLink = str('assets/images/' + os.path.basename(self.absoluteAvatarLink))
+        self.assetsLogoLink = str('assets/images/' + os.path.basename(self.absoluteLogoLink))
+        # self.assetsAlbumLink = str('assets/images/' + os.path.basename(self.absoluteAlbumLink))
         self.assetsAlbumLink = self.localAlbumLink
 
         # if self.photoSource == 'google':
@@ -635,9 +628,10 @@ class mainWindow(QMainWindow):
 
         #Need an if statement for creating name of theme
 
-        configArgs = {'currentDirectory' : currentDirectory,'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'logo' : self.assetsLogoLink,  'avatar' : self.assetsAvatarLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'skin' : 'mint'} 
+        configArgs = {'currentDirectory' : currentDirectory, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'logo' : self.assetsLogoLink,  'avatar' : self.assetsAvatarLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'skin' : 'mint'} 
         navArgs = {'currentDirectory' : currentDirectory, 'doi' : self.doiLink.text(), 'photoAlbum' : self.assetsAlbumLink}
-        createArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'logo' : self.absoluteLogoLink, 'album' : self.absoluteAlbumLink, 'avatar' : self.absoluteAlbumLink} 
+        createArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'logo' : self.absoluteLogoLink, 'album' : self.absoluteAlbumLink, 'avatar' : self.absoluteAvatarLink} 
+        contentArgs = {'currentDirectory' : currentDirectory}
 
         # For testing purposes use the args lines below
         # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
@@ -651,27 +645,21 @@ class mainWindow(QMainWindow):
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):
 
-            self.mkClone = editTheme(args = createArgs)
-            self.mkConfig = editConfig(args = configArgs)
-            self.mkNavigation = editNavigation(args = navArgs)
+            # self.mkClone = editTheme(args = createArgs)
+            # self.mkConfig = editConfig(args = configArgs)
+            # self.mkNavigation = editNavigation(args = navArgs)
+            # self.mkcontent = editContents(args = contentArgs)
 
 
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)
 
         if os.path.isdir(currentDirectory): 
-            for root, dirs, files in os.walk(currentDirectory):
-                files = [f for f in files if not f[0] == '.']
-                dirs[:] = [d for d in dirs if not d[0] == '.']
-                level = root.replace(currentDirectory, '').count(os.sep)
-                indent = ' ' * 4 * (level)
-                print('{}{}/'.format(indent, os.path.basename(root)) + '\n')
-                subindent = ' ' * 4 * (level + 1)
-                for f in files:
-                    print('{}{}'.format(subindent, f) + '\n')
 
+            self.mkcontent = editContents(args = contentArgs)
             self.mkClone = editTheme(args = createArgs)
             self.mkConfig = editConfig(args = configArgs)
             self.mkNavigation = editNavigation(args = navArgs)
+            
 
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
 

@@ -78,15 +78,15 @@ class editNavigation():
                
 
                 nav['main'] = []
-                nav['main'].append({'title' : "Repository Contents", 'url' : '/docs/repoContents'})#These can be found in the _pages folder
+                nav['main'].append({'title' : "Repository Contents", 'url' : '_pages/contents/'})#These can be found in the _pages folder
                 if not self.photoAlbum == '':
-                    nav['main'].append({'title' : "Photos", 'url' : '/assets/images/album/'}) # Have to check this with what comes from the gphoto integration
+                    nav['main'].append({'title' : "Photos", 'url' : 'assets/images/album'}) # Have to check this with what comes from the gphoto integration
                 if not self.doi == '':
                     nav['main'].append({'title' : "Paper", 'url' : self.doi})
 
                 yaml.dump(nav, fout)
 
-        subprocess.run(['rm', '-rf', 'navigation_template.yml'])
+        subprocess.run(['rm', '-rf', '_data/navigation_template.yml'])
 
 #For testing purposes
 

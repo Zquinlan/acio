@@ -3,27 +3,27 @@ layout: home
 
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/Coral_blue_tiny_fish_1.jpg
+  overlay_image:
 feature_row:
   - image_path: /assets/images/repoContents.png
     alt: "Contents"
     title: "Repository Contents"
     excerpt: "All contents of the github repository"
-    url: "/docs/repoContents"
+    url: "_pages/contents/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /assets/images/mm-responsive-feature.png
     alt: "Photos"
     title: "Research Photos"
     excerpt: "Photos from the paper!"
-    url: "/_docs/album/"
+    url: "assets/images/album/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
-  - image_path: /assets/images/mm-free-feature.png
-    alt: "100% free"
-    title: "100% free"
-    excerpt: "Free to use however you want under the MIT License. Clone it, fork it, customize it... whatever!"
-    url: "/docs/license/"
+  - image_path: /assets/images/suki_walk.jpg
+    alt: "Paper"
+    title: "Read the Paper!"
+    excerpt: "Read our paper in its entirety!"
+    url: "https://www.frontiersin.org/articles/10.3389/fmicb.2019.02397/"
     btn_class: "btn--primary"
     btn_label: "Learn more"    
     
