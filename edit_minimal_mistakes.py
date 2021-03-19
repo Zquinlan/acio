@@ -85,25 +85,56 @@ class editNavigation():
                     nav['main'].append({'title' : "Paper", 'url' : self.doi})
 
                 nav['content'] = []
+                children = []
 
                 for root, dirs, files in os.walk(self.currentDirectory):
                     files = [f for f in files if not f[0] == '.']
                     dirs[:] = [d for d in dirs if not d[0] == '.']
                     dirs[:] = [d for d in dirs if not d[0] == '_']
-                    code = [f for f in files if  f.endswith(('.R','.py', '.m', '.java','.css', 'rb', 'pl'))]
+                    code = [f for f in files if  f.endswith(('.R','.py', '.m', '.java','.css', 'rb', 'pl', '.bash', '.batchfile'))]
 
                     for f in files:
                         if f in code:
-                            title = f
                             url = str('/_pages/contents/' + f + '/')
-                            nav['content'].append({'title' : title, 'url': url})
+
+                            children.append({'title' : f, 'url': url})
+
+                nav['content'].append({'title' : 'Repository Contents', 'children' : children})
+                nav['content'].append({'title' : 'Photos', url: 'assets/images/album'})
+                nav['content'].append({'title' : 'Paper', url: self.doi})
+
 
                 yaml.dump(nav, fout)
 
         subprocess.run(['rm', '-rf', '_data/navigation_template.yml'])
 
+class editPhotoAlbum():
+    def __init__(self, args):
+        super().__init__()
+        self.currentDirectory = args['currentDirectory']
+        self.logo = args['logo']
+
+        with open(str(self.currentDirectory + '/assets/images/album.md'), 'w+') as fout:
+            frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.logo + '\n')
+            fout.write(frontmatter)
+            
+            fout.write('gallery:\n')
+
+            children = []
+
+            for root, dirs, files in os.walk(str(self.currentDirectory + '/assets/images/album/')):
+                files = [f for f in files if not f[0] == '.']
+                pics = [f for f in files if not f.endswith('.mov')]
+
+                for f in files:
+                    url = str('/assets/images/album/' + f + '\n')
+
+                    fout.write(str(' - image_path: ' + url))
+
+            fout.write('\n---\n{% include gallery%}')
+
 #For testing purposes
 
-# if __name__ == '__main__':
-#     createArgs = {'currentDirectory' :  '/Users/zacharyquinlan/Documents/temp', 'photoAlbum' : '', 'doi' : 'test'} 
-#     editNavigation(args = createArgs)
+if __name__ == '__main__':
+    createArgs = {'currentDirectory' :  '/Users/zacharyquinlan/Documents/Github/lastTest', 'logo': '', 'photoAlbum' : '/Users/zacharyquinlan/Documents/temp.nosync/album', 'doi' : 'test'} 
+    editPhotoAlbum(args = createArgs)

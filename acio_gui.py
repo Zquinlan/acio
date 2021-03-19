@@ -3,7 +3,7 @@ import qdarkstyle
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import pyqtSlot, QDir, Qt, QSize
-from edit_minimal_mistakes import editConfig, editNavigation
+from edit_minimal_mistakes import*
 from create_jekyll import editTheme
 from create_md import editContents
 
@@ -631,7 +631,7 @@ class mainWindow(QMainWindow):
         configArgs = {'currentDirectory' : currentDirectory, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'logo' : self.assetsLogoLink,  'avatar' : self.assetsAvatarLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'skin' : 'mint'} 
         navArgs = {'currentDirectory' : currentDirectory, 'doi' : self.doiLink.text(), 'photoAlbum' : self.assetsAlbumLink}
         createArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'logo' : self.absoluteLogoLink, 'album' : self.absoluteAlbumLink, 'avatar' : self.absoluteAvatarLink} 
-        contentArgs = {'currentDirectory' : currentDirectory}
+        contentArgs = {'currentDirectory' : currentDirectory, 'logo' : self.assetsLogoLink}
 
         # For testing purposes use the args lines below
         # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
@@ -659,6 +659,7 @@ class mainWindow(QMainWindow):
             self.mkClone = editTheme(args = createArgs)
             self.mkConfig = editConfig(args = configArgs)
             self.mkNavigation = editNavigation(args = navArgs)
+            self.mkAlbum = editPhotoAlbum(args = contentArgs)
             
 
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)

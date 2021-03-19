@@ -48,11 +48,17 @@ class editTheme():
         subprocess.run(['rm', '-rf', self.themeClone])
 
         subprocess.run(['mkdir', 'assets/images'])
-        subprocess.run(['mkdir', 'assets/images/album']) #Need to create md file for this
+        subprocess.run(['mkdir', 'assets/images/album'])
 
         subprocess.run(['cp', self.logo, 'assets/images/'])
         subprocess.run(['cp', self.avatar, 'assets/images/'])
-        # subprocess.run(['cp -R', self.album, 'assets/images/album/']) # Cannot copy this
+        
+        subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
+        os.chdir(str('assets/images/album/' + os.path.basename(self.album)))
+        subprocess.run('mv * ..', shell = True)
+        os.chdir('../../../../')
+        subprocess.run(['rm', '-rf', str('assets/images/album/' + os.path.basename(self.album))])
+
         subprocess.run(['mv', '_config.yml', '_config_template.yml'])
         subprocess.run(['mv', '_data/navigation.yml', '_data/navigation_template.yml'])
         subprocess.run(['mv', 'LICENSE', 'theme_LICENSE'])      
