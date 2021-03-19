@@ -1,4 +1,4 @@
-import sys, yaml, subprocess
+import sys, yaml, subprocess, os
 
 # Pass the following from the gui or clt to here
 # currentDirectory ## Need this to be set. It is defined in the args dictionary
@@ -83,6 +83,20 @@ class editNavigation():
                     nav['main'].append({'title' : "Photos", 'url' : 'assets/images/album'}) # Have to check this with what comes from the gphoto integration
                 if not self.doi == '':
                     nav['main'].append({'title' : "Paper", 'url' : self.doi})
+
+                nav['content'] = []
+
+                for root, dirs, files in os.walk(self.currentDirectory):
+                    files = [f for f in files if not f[0] == '.']
+                    dirs[:] = [d for d in dirs if not d[0] == '.']
+                    dirs[:] = [d for d in dirs if not d[0] == '_']
+                    code = [f for f in files if  f.endswith(('.R','.py', '.m', '.java','.css', 'rb', 'pl'))]
+
+                    for f in files:
+                        if f in code:
+                            title = f
+                            url = str('/_pages/contents/' + f + '/')
+                            nav['content'].append({'title' : title, 'url': url})
 
                 yaml.dump(nav, fout)
 

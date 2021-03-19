@@ -52,7 +52,7 @@ class editTheme():
 
         subprocess.run(['cp', self.logo, 'assets/images/'])
         subprocess.run(['cp', self.avatar, 'assets/images/'])
-        subprocess.run(['cp -R', self.album, 'assets/images/album/']) # Cannot copy this
+        # subprocess.run(['cp -R', self.album, 'assets/images/album/']) # Cannot copy this
         subprocess.run(['mv', '_config.yml', '_config_template.yml'])
         subprocess.run(['mv', '_data/navigation.yml', '_data/navigation_template.yml'])
         subprocess.run(['mv', 'LICENSE', 'theme_LICENSE'])      

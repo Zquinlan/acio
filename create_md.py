@@ -21,7 +21,7 @@ class editContents():
                 pathEdit = open(path, 'r') # This doesn't work because it is just the name of the file not the path
                 mdFile = str(self.currentDirectory + '/_pages/contents/' + f + '.md')
                 with open(mdFile, 'w+') as fout:
-                    fout.write('---\nlayout: posts\n---\n')
+                    fout.write('---\nlayout: posts\nsidebar:\n  nav: "content"\n---\n')
                     fout.write('```\n')
                     fout.write(pathEdit.read())
                     fout.write('```')
@@ -36,7 +36,8 @@ class editContents():
             for root, dirs, files in os.walk(self.currentDirectory):
                 files = [f for f in files if not f[0] == '.']
                 dirs[:] = [d for d in dirs if not d[0] == '.']
-                code = [f for f in files if  f.endswith(('.R','.py'))]
+                dirs[:] = [d for d in dirs if not d[0] == '_']
+                code = [f for f in files if  f.endswith(('.R','.py', '.m', '.java','.css', 'rb', 'pl'))]
 
                 level = root.replace(self.currentDirectory, '').count(os.sep)
                 num = '#' * (level)
