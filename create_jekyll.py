@@ -12,9 +12,9 @@ class editTheme():
         if args['theme'] == 'Minimal':
             self.themeAddress = 'https://github.com/mmistakes/minimal-mistakes'
             self.themeClone = 'minimal-mistakes'
-        if args['theme'] == 'Gridster':
-            self.themeAddress = 'https://github.com/DigitalMindCH/gridster-jekyll-theme'
-            self.themeClone = 'gridster-jekyll-theme'
+        # if args['theme'] == 'Gridster':
+        #     self.themeAddress = 'https://github.com/DigitalMindCH/gridster-jekyll-theme'
+        #     self.themeClone = 'gridster-jekyll-theme'
 
         # if win32 check git downloaded
         #git status
