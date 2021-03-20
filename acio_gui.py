@@ -2,7 +2,7 @@ import sys, os
 import qdarkstyle
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import pyqtSlot, QDir, Qt, QSize
+from PyQt5.QtCore import *
 from edit_minimal_mistakes import*
 from create_jekyll import editTheme
 from create_md import editContents
@@ -144,7 +144,13 @@ class socialPop(QDialog):
         self.twitterLabel.setText("Twitter handle")
         self.twitterLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
+
+
         self.twitterLink = QLineEdit(self)
+
+        twitterExp = QRegExp("\w*")
+        input_validator = QRegExpValidator(twitterExp, self.twitterLink)
+        self.twitterLink.setValidator(input_validator)
         self.twitterLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         #Github
@@ -188,7 +194,7 @@ class socialPop(QDialog):
         self.emailLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         #set placeholder text
-        self.twitterLink.setPlaceholderText('E.G. @Zquinlan')
+        self.twitterLink.setPlaceholderText('E.G. Zquinlan')
         self.githubLink.setPlaceholderText('E.G. Zquinlan')
         self.researchgateLink.setPlaceholderText('E.G. Zachary-Quinlan')
         self.orcidLink.setPlaceholderText('E.G. 0000-0002-0351-8927')
