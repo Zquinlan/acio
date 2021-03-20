@@ -27,14 +27,14 @@ class editConfig():
                 config['name'] = args['authorName']
                 config['title'] = args['title']
                 config['repository'] = args['repository']
-                config['logo'] = args['logo']
+                config['logo'] = args['assetsLogo']
                 config['minimal_mistakes_skin'] = args['skin']
                 config['description'] = ''
 
                 config['author']['name'] = args['authorName']
                 config['author']['bio'] =  ''
                 config['author']['location'] = ''
-                config['author']['avatar'] = args['avatar']
+                config['author']['avatar'] = args['assetsAvatar']
                 config['author']['email'] = args['email']
                 # config['plugins'].append({'jekyll-google-photos'})
 
@@ -66,7 +66,7 @@ class editNavigation():
 
         ##Retrieving arguments from args dictionary
         self.currentDirectory = args['currentDirectory']
-        self.photoAlbum = args['photoAlbum']
+        self.photoAlbum = args['assetsAlbum']
         self.doi = str('https://www.doi.org/' + args['doi'])
         
         with open(str(self.currentDirectory + '/_data/navigation.yml'), 'w+') as fout:

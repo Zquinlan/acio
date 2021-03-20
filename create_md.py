@@ -8,7 +8,7 @@ class editContents():
 
 
         self.currentDirectory = args['currentDirectory']
-        self.logo = args['logo']
+        self.logo = args['assetsLogo']
 
         os.chdir(self.currentDirectory)
         subprocess.run(['mkdir', '_pages'])

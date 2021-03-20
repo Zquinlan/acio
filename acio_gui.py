@@ -635,10 +635,7 @@ class mainWindow(QMainWindow):
 
         #Need an if statement for creating name of theme
 
-        configArgs = {'currentDirectory' : currentDirectory, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'logo' : self.assetsLogoLink,  'avatar' : self.assetsAvatarLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'skin' : 'mint'} 
-        navArgs = {'currentDirectory' : currentDirectory, 'doi' : self.doiLink.text(), 'photoAlbum' : self.assetsAlbumLink}
-        createArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'logo' : self.absoluteLogoLink, 'album' : self.absoluteAlbumLink, 'avatar' : self.absoluteAvatarLink} 
-        contentArgs = {'currentDirectory' : currentDirectory, 'logo' : self.assetsLogoLink}
+        configArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'skin' : 'mint', 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle)} 
 
         # For testing purposes use the args lines below
         # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
@@ -662,11 +659,11 @@ class mainWindow(QMainWindow):
 
         if os.path.isdir(currentDirectory): 
 
-            self.mkcontent = editContents(args = contentArgs)
-            self.mkClone = editTheme(args = createArgs)
+            self.mkcontent = editContents(args = configArgs)
+            self.mkClone = editTheme(args = configArgs)
             self.mkConfig = editConfig(args = configArgs)
-            self.mkNavigation = editNavigation(args = navArgs)
-            self.mkAlbum = editPhotoAlbum(args = contentArgs)
+            self.mkNavigation = editNavigation(args = configArgs)
+            self.mkAlbum = editPhotoAlbum(args = configArgs)
             
 
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)

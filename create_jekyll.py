@@ -5,9 +5,9 @@ class editTheme():
         super().__init__()
 
         self.currentDirectory = args['currentDirectory']
-        self.logo = args['logo']
-        self.album = args['album']
-        self.avatar = args['avatar']
+        self.logo = args['absoluteLogo']
+        self.album = args['absoluteAlbum']
+        self.avatar = args['absoluteAvatar']
 
         if args['theme'] == 'Minimal':
             self.themeAddress = 'https://github.com/mmistakes/minimal-mistakes'
@@ -50,7 +50,7 @@ class editTheme():
         subprocess.run(['mkdir', 'assets/images'])
         subprocess.run(['mkdir', 'assets/images/album'])
 
-        subprocess.run(['cp', self.logo, 'assets/images/'])
+        subprocess.run(['cp', self.logo, 'assets/images/'])absolute
         subprocess.run(['cp', self.avatar, 'assets/images/'])
         
         subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
