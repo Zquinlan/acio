@@ -100,8 +100,8 @@ class editNavigation():
                             children.append({'title' : f, 'url': url})
 
                 nav['content'].append({'title' : 'Repository Contents', 'children' : children})
-                nav['content'].append({'title' : 'Photos', url: 'assets/images/album'})
-                nav['content'].append({'title' : 'Paper', url: self.doi})
+                nav['content'].append({'title' : 'Photos', 'url': 'assets/images/album'})
+                nav['content'].append({'title' : 'Paper', 'url': self.doi})
 
 
                 yaml.dump(nav, fout)
@@ -115,7 +115,7 @@ class editPhotoAlbum():
         self.logo = args['logo']
 
         with open(str(self.currentDirectory + '/assets/images/album.md'), 'w+') as fout:
-            frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.logo + '\n')
+            frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.logo + '\nsidebar:\n  nav: "content" \n')
             fout.write(frontmatter)
             
             fout.write('gallery:\n')
@@ -124,9 +124,9 @@ class editPhotoAlbum():
 
             for root, dirs, files in os.walk(str(self.currentDirectory + '/assets/images/album/')):
                 files = [f for f in files if not f[0] == '.']
-                pics = [f for f in files if not f.endswith('.mov')]
+                pics = [f for f in files if not f.endswith(('.mov', '.mp4'))]
 
-                for f in files:
+                for f in pics:
                     url = str('/assets/images/album/' + f + '\n')
 
                     fout.write(str(' - image_path: ' + url))
@@ -135,6 +135,6 @@ class editPhotoAlbum():
 
 #For testing purposes
 
-if __name__ == '__main__':
-    createArgs = {'currentDirectory' :  '/Users/zacharyquinlan/Documents/Github/lastTest', 'logo': '', 'photoAlbum' : '/Users/zacharyquinlan/Documents/temp.nosync/album', 'doi' : 'test'} 
-    editPhotoAlbum(args = createArgs)
+# if __name__ == '__main__':
+#     createArgs = {'currentDirectory' :  '/Users/zacharyquinlan/Documents/Github/lastTest', 'logo': '', 'photoAlbum' : '/Users/zacharyquinlan/Documents/temp.nosync/album', 'doi' : 'test'} 
+#     editPhotoAlbum(args = createArgs)

@@ -71,7 +71,7 @@ class editTheme():
         readin = open('README.md', 'r')
         with open('index.md', 'a+') as fin:
             # Adding the readme to the end of the index file and closeing both
-            for line in fin: 
+            for line in fin.read(): 
                 if 'overlay_image' in line: #This still does not work
                     fin.write(str(' assets/images/' + os.path.basename(self.logo))) # try tomorrow
             fin.write(readin.read())
@@ -80,6 +80,8 @@ class editTheme():
 
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/home.html', '_layouts/home.html'])
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/repoContents.png', 'assets/images/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/paper.jpg', 'assets/images/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/photos.jpg', 'assets/images/'])
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/author-profile.html', '_includes/'])
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/footer.html', '_includes/'])
         #create docs/ directory

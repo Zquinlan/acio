@@ -235,22 +235,22 @@ class gPhotosPop(QDialog):
 
         #All google photos
         #Label for logo link
-        self.gLogoLabel = QLabel(self)
-        self.gLogoLabel.setText("Logo from Google Photos Sharing link:")
-        self.gLogoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        # self.gLogoLabel = QLabel(self)
+        # self.gLogoLabel.setText("Logo from Google Photos Sharing link:")
+        # self.gLogoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         
-        #Logo link line edit
-        self.gLogoLine = QLineEdit()
-        self.gLogoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        # #Logo link line edit
+        # self.gLogoLine = QLineEdit()
+        # self.gLogoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         
-        #Label for google album
-        self.gPhotoLabel = QLabel(self)
-        self.gPhotoLabel.setText("Google Photos Album Sharing link:")
-        self.gPhotoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        # #Label for google album
+        # self.gPhotoLabel = QLabel(self)
+        # self.gPhotoLabel.setText("Google Photos Album Sharing link:")
+        # self.gPhotoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
-        #Album link line edit
-        self.gPhotoLine = QLineEdit()
-        self.gPhotoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        # #Album link line edit
+        # self.gPhotoLine = QLineEdit()
+        # self.gPhotoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         #All local photos
         #Label for logo
@@ -284,12 +284,12 @@ class gPhotosPop(QDialog):
         self.localLogoLine.searchDirectory.setPlaceholderText('Find Picture')
         self.localPhotoLine.searchDirectory.setPlaceholderText('Find Album Folder')
         self.localAvatarLine.searchDirectory.setPlaceholderText('Find Picture')
-        self.gLogoLine.setPlaceholderText('Copy + Paste Link Here')
-        self.gPhotoLine.setPlaceholderText('Copy + Paste Link Here')
+        # self.gLogoLine.setPlaceholderText('Copy + Paste Link Here')
+        # self.gPhotoLine.setPlaceholderText('Copy + Paste Link Here')
 
-        # Error label
-        self.noPhotos = QLabel(self)
-        self.noPhotos.setText("Please check an option for photo source")
+        # # Error label
+        # self.noPhotos = QLabel(self)
+        # self.noPhotos.setText("Please check an option for photo source")
 
         # Save Button
         self.save = QPushButton("Save", self)
@@ -299,15 +299,16 @@ class gPhotosPop(QDialog):
         # Add Widgets
         self.layout.addWidget(self.localLogoLabel)
         self.layout.addWidget(self.localLogoLine)
-        self.layout.addWidget(self.localPhotoLabel)
-        self.layout.addWidget(self.localPhotoLine)
         self.layout.addWidget(self.localAvatarLabel)
         self.layout.addWidget(self.localAvatarLine)
-        self.layout.addWidget(self.gLogoLabel)
-        self.layout.addWidget(self.gLogoLine)
-        self.layout.addWidget(self.gPhotoLabel)
-        self.layout.addWidget(self.gPhotoLine)
-        self.layout.addWidget(self.noPhotos)
+        self.layout.addWidget(self.localPhotoLabel)
+        self.layout.addWidget(self.localPhotoLine)
+
+        # self.layout.addWidget(self.gLogoLabel)
+        # self.layout.addWidget(self.gLogoLine)
+        # self.layout.addWidget(self.gPhotoLabel)
+        # self.layout.addWidget(self.gPhotoLine)
+        # self.layout.addWidget(self.noPhotos)
         self.layout.addWidget(self.save)
 
         self.setLayout(self.layout)
@@ -450,21 +451,21 @@ class mainWindow(QMainWindow):
         photosLayout.setContentsMargins(0,0,0,0)
 
         #Photo Radio Buttons
-        self.localPhotos = QCheckBox(self)
-        self.localPhotos.setText("Upload photos")
-        photosLayout.addWidget(self.localPhotos)
+        # self.localPhotos = QCheckBox(self)
+        # self.localPhotos.setText("Upload photos")
+        # photosLayout.addWidget(self.localPhotos)
 
-        self.googlePhotos = QCheckBox(self)
-        self.googlePhotos.setText("Google photos")
-        photosLayout.addWidget(self.googlePhotos)
+        # self.googlePhotos = QCheckBox(self)
+        # self.googlePhotos.setText("Google photos")
+        # photosLayout.addWidget(self.googlePhotos)
 
         # Google Photos pop out
-        self.gPhotosButton = QPushButton("Add Photos (Optional)", self)
+        self.gPhotosButton = QPushButton("Add Photos (Reccomended)", self)
         self.gPhotosButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.gPhotosButton.clicked.connect(self.photosClick)
 
-        self.gLogoLink = ''
-        self.gAlbumLink = ''
+        # self.gLogoLink = ''
+        # self.gAlbumLink = ''
         self.localLogoLink = ''
         self.localAlbumLink = ''
         self.localAvatarLink = ''
@@ -520,42 +521,42 @@ class mainWindow(QMainWindow):
         if not self.localAvatarLink == '':
             self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
 
-        if not self.gLogoLink == '':
-            self.popout.gLogoLine.setText(self.gLogoLink)
-        if not self.gAlbumLink == '':
-            self.popout.gPhotoLine.setText(self.gAlbumLink)
+        # if not self.gLogoLink == '':
+        #     self.popout.gLogoLine.setText(self.gLogoLink)
+        # if not self.gAlbumLink == '':
+        #     self.popout.gPhotoLine.setText(self.gAlbumLink)
 
 
-        if self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
+        # if self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
 
 
-            self.popout.gLogoLabel.hide()
-            self.popout.gLogoLine.hide()
-            self.popout.gPhotoLabel.hide()
-            self.popout.gPhotoLine.hide()
-            self.popout.noPhotos.hide()
+        # self.popout.gLogoLabel.hide()
+        # self.popout.gLogoLine.hide()
+        # self.popout.gPhotoLabel.hide()
+        # self.popout.gPhotoLine.hide()
+        # self.popout.noPhotos.hide()
 
 
-        if self.googlePhotos.isChecked() and not self.localPhotos.isChecked():
+        # if self.googlePhotos.isChecked() and not self.localPhotos.isChecked():
 
-            self.popout.localLogoLabel.hide()
-            self.popout.localLogoLine.hide()
-            self.popout.localPhotoLabel.hide()
-            self.popout.localPhotoLine.hide()
-            self.popout.noPhotos.hide()
+        #     self.popout.localLogoLabel.hide()
+        #     self.popout.localLogoLine.hide()
+        #     self.popout.localPhotoLabel.hide()
+        #     self.popout.localPhotoLine.hide()
+        #     self.popout.noPhotos.hide()
 
-        if self.googlePhotos.isChecked() and self.localPhotos.isChecked():
-            self.popout.noPhotos.hide()
+        # if self.googlePhotos.isChecked() and self.localPhotos.isChecked():
+        #     self.popout.noPhotos.hide()
 
-        if not self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
-            self.popout.gLogoLabel.hide()
-            self.popout.gLogoLine.hide()
-            self.popout.gPhotoLabel.hide()
-            self.popout.gPhotoLine.hide()
-            self.popout.localLogoLabel.hide()
-            self.popout.localLogoLine.hide()
-            self.popout.localPhotoLabel.hide()
-            self.popout.localPhotoLine.hide()
+        # if not self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
+        #     self.popout.gLogoLabel.hide()
+        #     self.popout.gLogoLine.hide()
+        #     self.popout.gPhotoLabel.hide()
+        #     self.popout.gPhotoLine.hide()
+        #     self.popout.localLogoLabel.hide()
+        #     self.popout.localLogoLine.hide()
+        #     self.popout.localPhotoLabel.hide()
+        #     self.popout.localPhotoLine.hide()
 
 
         # Retrieve line text when closed
@@ -569,10 +570,10 @@ class mainWindow(QMainWindow):
         if not self.popout.localAvatarLine.searchDirectory.text() == '':
             self.localAvatarLink = self.popout.localAvatarLine.searchDirectory.text()
 
-        if not self.popout.gLogoLine.text() == '':
-            self.gLogoLink = self.popout.gLogoLine.text()
-        if not self.popout.gPhotoLine.text() == '':
-            self.gAlbumLink = self.popout.gPhotoLine.text()
+        # if not self.popout.gLogoLine.text() == '':
+        #     self.gLogoLink = self.popout.gLogoLine.text()
+        # if not self.popout.gPhotoLine.text() == '':
+        #     self.gAlbumLink = self.popout.gPhotoLine.text()
 
 
     def socialClick(self):

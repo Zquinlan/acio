@@ -12,14 +12,14 @@ feature_row:
     url: "_pages/contents/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
-  - image_path: /assets/images/mm-responsive-feature.png
+  - image_path: /assets/images/photos.jpg
     alt: "Photos"
     title: "Research Photos"
     excerpt: "Photos from the paper!"
     url: "assets/images/album/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
-  - image_path: /assets/images/suki_walk.jpg
+  - image_path: /assets/images/paper.jpg
     alt: "Paper"
     title: "Read the Paper!"
     excerpt: "Read our paper in its entirety!"
