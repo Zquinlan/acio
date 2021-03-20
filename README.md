@@ -5,6 +5,6 @@
 
 ## Developers
 - Zach Quinlan
-    - (contact)[mailto:zquinlan@gmail.com]
+    - [contact](mailto:zquinlan@gmail.com)
 - Nick Quinlan
-    - (Github)[github.com/nquinlan]
+    - [Github](github.com/nquinlan)
