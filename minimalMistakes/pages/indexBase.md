@@ -1,9 +1,4 @@
----
-layout: home
 
-header:
-  overlay_color: "#5e616c"
-  overlay_image:
 feature_row:
   - image_path: /assets/images/repoContents.png
     alt: "Contents"

@@ -17,12 +17,17 @@ from create_md import editContents
     # Then an if statement in the slot for mkframework checking photoChoice and setting photoAlbum
 
 
-class themeScroll(QScrollArea):
+class themeScroll(QWidget):
     def __init__ (self):
         super().__init__()
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.setWidgetResizable(True)
+        total_layout = QVBoxLayout(self)
+        self.setLayout(total_layout)
+
+        scroll = QScrollArea(self)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setWidgetResizable(True)
+        scroll.themeSelected = ''
 
         #Defining scroll area
         radioButtonContent = QWidget()
@@ -30,7 +35,7 @@ class themeScroll(QScrollArea):
         radioButtonLayout.setSpacing(20)
         radioButtonLayout.setContentsMargins(0,0,0,20)
 
-        themes = ["Minimal", "Gridster", "Millennial", "Alembic", "Bulma"] #Minimal dark contrast and mint themes?
+        themes = ["Minimal", "Alembic", "Bulma"] #Minimal dark contrast and mint themes?
         col = 0
 
 
@@ -52,14 +57,39 @@ class themeScroll(QScrollArea):
 
             col += 1
 
+        self.skinDropdown = QComboBox(self)
+        self.skinDropdown.setFixedWidth(100)
+        self.skinDropdown.setView(QListView())
 
 
-        self.setWidget(radioButtonContent)
-        self.setWidgetResizable(True)
+        scroll.setWidget(radioButtonContent)
+        scroll.setWidgetResizable(True)
+        total_layout.addWidget(scroll)
+        total_layout.addWidget(self.skinDropdown)
+
+    def __style__(self):
+        self.skinDropdown.setStyleSheet("QListView::item {height:10px;}")
+
+
 
     @pyqtSlot()
     def onClicked(self):
-        self.themeSelected = self.sender()
+        selected = self.sender()
+        self.themeSelected = selected.text()
+
+        minimalSkins = ["default", "air", "mint", "dark"]
+        defaultSkin = ["default"]
+
+
+        self.skinDropdown.clear()
+
+        if self.themeSelected == 'Minimal':
+            self.skinDropdown.addItems(minimalSkins)
+
+        if self.themeSelected != 'Minimal':
+            self.skinDropdown.addItem("default")
+
+        self.skinDropdown.adjustSize()
 
 
 
@@ -143,7 +173,6 @@ class socialPop(QDialog):
         self.twitterLabel = QLabel(self)
         self.twitterLabel.setText("Twitter handle")
         self.twitterLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-
 
 
         self.twitterLink = QLineEdit(self)
@@ -239,25 +268,6 @@ class gPhotosPop(QDialog):
         self.layout = QVBoxLayout()
         self.layout.setSpacing(20)
 
-        #All google photos
-        #Label for logo link
-        # self.gLogoLabel = QLabel(self)
-        # self.gLogoLabel.setText("Logo from Google Photos Sharing link:")
-        # self.gLogoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        
-        # #Logo link line edit
-        # self.gLogoLine = QLineEdit()
-        # self.gLogoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        
-        # #Label for google album
-        # self.gPhotoLabel = QLabel(self)
-        # self.gPhotoLabel.setText("Google Photos Album Sharing link:")
-        # self.gPhotoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-
-        # #Album link line edit
-        # self.gPhotoLine = QLineEdit()
-        # self.gPhotoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-
         #All local photos
         #Label for logo
         self.localLogoLabel = QLabel(self)
@@ -290,12 +300,7 @@ class gPhotosPop(QDialog):
         self.localLogoLine.searchDirectory.setPlaceholderText('Find Picture')
         self.localPhotoLine.searchDirectory.setPlaceholderText('Find Album Folder')
         self.localAvatarLine.searchDirectory.setPlaceholderText('Find Picture')
-        # self.gLogoLine.setPlaceholderText('Copy + Paste Link Here')
-        # self.gPhotoLine.setPlaceholderText('Copy + Paste Link Here')
 
-        # # Error label
-        # self.noPhotos = QLabel(self)
-        # self.noPhotos.setText("Please check an option for photo source")
 
         # Save Button
         self.save = QPushButton("Save", self)
@@ -310,11 +315,6 @@ class gPhotosPop(QDialog):
         self.layout.addWidget(self.localPhotoLabel)
         self.layout.addWidget(self.localPhotoLine)
 
-        # self.layout.addWidget(self.gLogoLabel)
-        # self.layout.addWidget(self.gLogoLine)
-        # self.layout.addWidget(self.gPhotoLabel)
-        # self.layout.addWidget(self.gPhotoLine)
-        # self.layout.addWidget(self.noPhotos)
         self.layout.addWidget(self.save)
 
         self.setLayout(self.layout)
@@ -324,8 +324,6 @@ class gPhotosPop(QDialog):
     @pyqtSlot()
     def closeClick(self):
         self.close()
-
-
 
 
 class mainWindow(QMainWindow):
@@ -425,6 +423,8 @@ class mainWindow(QMainWindow):
         self.themeSelect.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         layout.addWidget(self.themeSelect)
 
+
+
         # DOI addition widget
         self.doi = QWidget()
         doiLayout = QHBoxLayout(self.doi)
@@ -455,15 +455,6 @@ class mainWindow(QMainWindow):
         self.photos = QWidget()
         photosLayout = QHBoxLayout(self.photos)
         photosLayout.setContentsMargins(0,0,0,0)
-
-        #Photo Radio Buttons
-        # self.localPhotos = QCheckBox(self)
-        # self.localPhotos.setText("Upload photos")
-        # photosLayout.addWidget(self.localPhotos)
-
-        # self.googlePhotos = QCheckBox(self)
-        # self.googlePhotos.setText("Google photos")
-        # photosLayout.addWidget(self.googlePhotos)
 
         # Google Photos pop out
         self.gPhotosButton = QPushButton("Add Photos (Reccomended)", self)
@@ -527,44 +518,6 @@ class mainWindow(QMainWindow):
         if not self.localAvatarLink == '':
             self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
 
-        # if not self.gLogoLink == '':
-        #     self.popout.gLogoLine.setText(self.gLogoLink)
-        # if not self.gAlbumLink == '':
-        #     self.popout.gPhotoLine.setText(self.gAlbumLink)
-
-
-        # if self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
-
-
-        # self.popout.gLogoLabel.hide()
-        # self.popout.gLogoLine.hide()
-        # self.popout.gPhotoLabel.hide()
-        # self.popout.gPhotoLine.hide()
-        # self.popout.noPhotos.hide()
-
-
-        # if self.googlePhotos.isChecked() and not self.localPhotos.isChecked():
-
-        #     self.popout.localLogoLabel.hide()
-        #     self.popout.localLogoLine.hide()
-        #     self.popout.localPhotoLabel.hide()
-        #     self.popout.localPhotoLine.hide()
-        #     self.popout.noPhotos.hide()
-
-        # if self.googlePhotos.isChecked() and self.localPhotos.isChecked():
-        #     self.popout.noPhotos.hide()
-
-        # if not self.localPhotos.isChecked() and not self.googlePhotos.isChecked():
-        #     self.popout.gLogoLabel.hide()
-        #     self.popout.gLogoLine.hide()
-        #     self.popout.gPhotoLabel.hide()
-        #     self.popout.gPhotoLine.hide()
-        #     self.popout.localLogoLabel.hide()
-        #     self.popout.localLogoLine.hide()
-        #     self.popout.localPhotoLabel.hide()
-        #     self.popout.localPhotoLine.hide()
-
-
         # Retrieve line text when closed
         self.popout.exec_()
 
@@ -575,11 +528,6 @@ class mainWindow(QMainWindow):
             self.localAlbumLink = self.popout.localPhotoLine.searchDirectory.text()
         if not self.popout.localAvatarLine.searchDirectory.text() == '':
             self.localAvatarLink = self.popout.localAvatarLine.searchDirectory.text()
-
-        # if not self.popout.gLogoLine.text() == '':
-        #     self.gLogoLink = self.popout.gLogoLine.text()
-        # if not self.popout.gPhotoLine.text() == '':
-        #     self.gAlbumLink = self.popout.gPhotoLine.text()
 
 
     def socialClick(self):
@@ -629,30 +577,27 @@ class mainWindow(QMainWindow):
         # self.assetsAlbumLink = str('assets/images/' + os.path.basename(self.absoluteAlbumLink))
         self.assetsAlbumLink = self.localAlbumLink
 
-        # if self.photoSource == 'google':
-            # self.absoluteLogoLink = self.gLogoLink
-            # self.absoluteAlbumLink = self.gAlbumLink
+        self.theme = self.themeSelect.themeSelected
+        self.skin = str(self.themeSelect.skinDropdown.currentText())
+
+        self.doiNumber = self.doiLink.text()
+
 
         #Need an if statement for creating name of theme
+        print(str(self.theme + ' ' + self.skin))
 
-        configArgs = {'currentDirectory' : currentDirectory, 'theme' : 'Minimal', 'skin' : 'mint', 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle)} 
+        configArgs = {'currentDirectory' : currentDirectory, 'theme' : self.theme, 'skin' : self.skin, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'doi' : self.doiNumber} 
 
         # For testing purposes use the args lines below
         # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
         # navArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'doi' : '10.3389/fmicb.2019.02397', 'photoAlbum' : ''}
         # createArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'theme' : 'Minimal', 'logo' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes/assets/images/Coral_blue_tiny_fish_1.jpg', 'album' : '', 'avatar' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes//assets/images/zaq2020.jpg'} 
 
-        # Need some way to pick between google photos and local
         # This needs to change and avatar option needs to be added 
         # When themes have been fixed skin = self.themeSelect.theme
 
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):
-
-            # self.mkClone = editTheme(args = createArgs)
-            # self.mkConfig = editConfig(args = configArgs)
-            # self.mkNavigation = editNavigation(args = navArgs)
-            # self.mkcontent = editContents(args = contentArgs)
 
 
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)

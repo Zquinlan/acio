@@ -58,6 +58,8 @@ class editConfig():
 
                 yaml.dump(config, fout)
 
+            fout.write('collections:\n  pages:\n    output: true\n    permalink: /:path/')
+
         subprocess.run(['rm', '-rf', '_config_template.yml'])
 
 class editNavigation():
@@ -112,7 +114,7 @@ class editPhotoAlbum():
     def __init__(self, args):
         super().__init__()
         self.currentDirectory = args['currentDirectory']
-        self.logo = args['logo']
+        self.logo = args['assetsLogo']
 
         with open(str(self.currentDirectory + '/assets/images/album.md'), 'w+') as fout:
             frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.logo + '\nsidebar:\n  nav: "content" \n')

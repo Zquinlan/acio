@@ -50,7 +50,7 @@ class editTheme():
         subprocess.run(['mkdir', 'assets/images'])
         subprocess.run(['mkdir', 'assets/images/album'])
 
-        subprocess.run(['cp', self.logo, 'assets/images/'])absolute
+        subprocess.run(['cp', self.logo, 'assets/images/'])
         subprocess.run(['cp', self.avatar, 'assets/images/'])
         
         subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
@@ -66,17 +66,25 @@ class editTheme():
         #Need to be able to add these files. Maybe git clone from the acio GH?
         #Copy in pages and images for acio
         #Index file for mainpage of website
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/index.md', '.'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/indexBase.md', '.'])
 
         readin = open('README.md', 'r')
-        with open('index.md', 'a+') as fin:
-            # Adding the readme to the end of the index file and closeing both
-            for line in fin.read(): 
-                if 'overlay_image' in line: #This still does not work
-                    fin.write(str(' assets/images/' + os.path.basename(self.logo))) # try tomorrow
-            fin.write(readin.read())
+        indexin = open('indexBase.md', 'r')
+        overlay = str('overlay_image')
+
+
+
+        with open('index.md', 'w') as fin:
+            fin.write('---\nlayout: home\n\nheader:\n  overlay_color: "#5e616c"\n  overlay_image:')
+            fin.write(str(' assets/images/' + os.path.basename(self.logo) + '\n'))
+            fin.write('excerpt: >\n  <br /><br /><br />')
+
+            fin.write(indexin.read()) # adding rest of index base to index.md
+            fin.write(readin.read())  # Adding the readme to the end of the index
         
         readin.close()
+        readin.close()
+        subprocess.run(['rm', '-rf', 'indexBase.md'])
 
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/home.html', '_layouts/home.html'])
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/repoContents.png', 'assets/images/'])
