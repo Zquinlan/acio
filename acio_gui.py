@@ -278,7 +278,7 @@ class gPhotosPop(QDialog):
         self.localLogoLine = fileSearch()
         self.localLogoLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         
-        #Label for google album
+        #Label for album
         self.localPhotoLabel = QLabel(self)
         self.localPhotoLabel.setText("Local Photo Album:")
         self.localPhotoLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
@@ -289,17 +289,28 @@ class gPhotosPop(QDialog):
 
         #Label for avatar picture
         self.localAvatarLabel = QLabel(self)
-        self.localAvatarLabel.setText("Photo of author from local:")
+        self.localAvatarLabel.setText("Photo of author from local file:")
         self.localAvatarLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
-        #Album link line edit
+        #Avatar link line edit
         self.localAvatarLine = fileSearch()
         self.localAvatarLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #Splash link label
+        self.localSplashLabel = QLabel(self)
+        self.localSplashLabel.setText("Website splash image from local file:")
+        self.localSplashLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        #Splash link line edit
+        self.localSplashLine = fileSearch()
+        self.localSplashLine.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
 
         #Set placeholder text
         self.localLogoLine.searchDirectory.setPlaceholderText('Find Picture')
         self.localPhotoLine.searchDirectory.setPlaceholderText('Find Album Folder')
         self.localAvatarLine.searchDirectory.setPlaceholderText('Find Picture')
+        self.localSplashLine.searchDirectory.setPlaceholderText('Find Picture')
 
 
         # Save Button
@@ -312,6 +323,8 @@ class gPhotosPop(QDialog):
         self.layout.addWidget(self.localLogoLine)
         self.layout.addWidget(self.localAvatarLabel)
         self.layout.addWidget(self.localAvatarLine)
+        self.layout.addWidget(self.localSplashLabel)
+        self.layout.addWidget(self.localSplashLine)
         self.layout.addWidget(self.localPhotoLabel)
         self.layout.addWidget(self.localPhotoLine)
 
@@ -393,6 +406,7 @@ class mainWindow(QMainWindow):
         # Setting Window Geometry
         self.setWindowTitle(self.title)
         self.setGeometry(0, 0, 700, 600)
+        self.statusBar().showMessage('Ready')
 
         #Defining scroll area
         scroll = QScrollArea()
@@ -461,11 +475,10 @@ class mainWindow(QMainWindow):
         self.gPhotosButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.gPhotosButton.clicked.connect(self.photosClick)
 
-        # self.gLogoLink = ''
-        # self.gAlbumLink = ''
         self.localLogoLink = ''
         self.localAlbumLink = ''
         self.localAvatarLink = ''
+        self.localSplashLink = ''
 
         photosLayout.setAlignment(Qt.AlignLeft)
         photosLayout.addWidget(self.gPhotosButton)
@@ -517,6 +530,8 @@ class mainWindow(QMainWindow):
             self.popout.localPhotoLine.searchDirectory.setText(self.localAlbumLink)
         if not self.localAvatarLink == '':
             self.popout.localAvatarLine.searchDirectory.setText(self.localAvatarLink)
+        if not self.localSplashLink == '':
+            self.popout.localSplashLine.searchDirectory.setText(self.localSplashLink)
 
         # Retrieve line text when closed
         self.popout.exec_()
@@ -528,6 +543,8 @@ class mainWindow(QMainWindow):
             self.localAlbumLink = self.popout.localPhotoLine.searchDirectory.text()
         if not self.popout.localAvatarLine.searchDirectory.text() == '':
             self.localAvatarLink = self.popout.localAvatarLine.searchDirectory.text()
+        if not self.popout.localSplashLine.searchDirectory.text() == '':
+            self.localSplashLink = self.popout.localSplashLine.searchDirectory.text()
 
 
     def socialClick(self):
@@ -565,9 +582,7 @@ class mainWindow(QMainWindow):
 
     def makeClick(self):
         currentDirectory = self.dir.searchDirectory.text()
-        
-
-        # if self.photoSource == 'local': # This needs to strip the logolink to just the end/
+       
         self.absoluteLogoLink = self.localLogoLink
         self.absoluteAvatarLink = self.localAvatarLink
         self.absoluteAlbumLink = self.localAlbumLink
@@ -579,22 +594,9 @@ class mainWindow(QMainWindow):
 
         self.theme = self.themeSelect.themeSelected
         self.skin = str(self.themeSelect.skinDropdown.currentText())
-
         self.doiNumber = self.doiLink.text()
 
-
-        #Need an if statement for creating name of theme
-        print(str(self.theme + ' ' + self.skin))
-
         configArgs = {'currentDirectory' : currentDirectory, 'theme' : self.theme, 'skin' : self.skin, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'doi' : self.doiNumber} 
-
-        # For testing purposes use the args lines below
-        # configArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'authorName' : 'Zach Quinlan', 'title' : 'AcIO test', 'email' : 'zquinlan@gmail.com', 'repository' : '/Users/zacharyquinlan/Documents/temp.nosync', 'logo' : '/assets/images/Coral_blue_tiny_fish_1.jpg',  'avatar' : '/assets/images/zaq2020.jpg', 'personalWeb' : '', 'twitterHandle' : 'https://www.twitter.com/zquinlan', 'researchgateHandle' : 'https://www.researchgate.net/profile/zachary-quinlan', 'githubHandle' : 'https://github.com/zquinlan', 'orcidHandle' : 'https://orcid.org/' , 'skin' : 'mint'} 
-        # navArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'doi' : '10.3389/fmicb.2019.02397', 'photoAlbum' : ''}
-        # createArgs = {'currentDirectory' : '/Users/zacharyquinlan/Documents/temp.nosync', 'theme' : 'Minimal', 'logo' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes/assets/images/Coral_blue_tiny_fish_1.jpg', 'album' : '', 'avatar' : '/Users/zacharyquinlan/Documents/Github/jekyll_themes/minimal-mistakes//assets/images/zaq2020.jpg'} 
-
-        # This needs to change and avatar option needs to be added 
-        # When themes have been fixed skin = self.themeSelect.theme
 
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):
@@ -604,11 +606,19 @@ class mainWindow(QMainWindow):
 
         if os.path.isdir(currentDirectory): 
 
+            self.statusBar().clearMessage()
+            self.statusBar().showMessage('Investigating repository')
             self.mkcontent = editContents(args = configArgs)
+
+            self.statusBar().clearMessage()
+            self.statusBar().showMessage('Creating website theme')
             self.mkClone = editTheme(args = configArgs)
             self.mkConfig = editConfig(args = configArgs)
             self.mkNavigation = editNavigation(args = configArgs)
             self.mkAlbum = editPhotoAlbum(args = configArgs)
+
+            self.statusBar().clearMessage()
+            self.statusBar().showMessage('Ready')
             
 
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
