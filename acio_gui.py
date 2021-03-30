@@ -586,9 +586,11 @@ class mainWindow(QMainWindow):
         self.absoluteLogoLink = self.localLogoLink
         self.absoluteAvatarLink = self.localAvatarLink
         self.absoluteAlbumLink = self.localAlbumLink
+        self.absoluteSplashLink = self.localSplashLink
 
         self.assetsAvatarLink = str('assets/images/' + os.path.basename(self.absoluteAvatarLink))
         self.assetsLogoLink = str('assets/images/' + os.path.basename(self.absoluteLogoLink))
+        self.assetsSplashLink = str('assets/images/' + os.path.basename(self.absoluteSplashLink))
         # self.assetsAlbumLink = str('assets/images/' + os.path.basename(self.absoluteAlbumLink))
         self.assetsAlbumLink = self.localAlbumLink
 
@@ -596,7 +598,7 @@ class mainWindow(QMainWindow):
         self.skin = str(self.themeSelect.skinDropdown.currentText())
         self.doiNumber = self.doiLink.text()
 
-        configArgs = {'currentDirectory' : currentDirectory, 'theme' : self.theme, 'skin' : self.skin, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'doi' : self.doiNumber} 
+        configArgs = {'currentDirectory' : currentDirectory, 'theme' : self.theme, 'skin' : self.skin, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsSplash': self.assetsSplashLink, 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteSplash' : self.absoluteSplashLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'doi' : self.doiNumber} 
 
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):

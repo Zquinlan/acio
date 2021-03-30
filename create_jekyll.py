@@ -8,6 +8,7 @@ class editTheme():
         self.logo = args['absoluteLogo']
         self.album = args['absoluteAlbum']
         self.avatar = args['absoluteAvatar']
+        self.splash = args['absoluteSplash']
 
         if args['theme'] == 'Minimal':
             self.themeAddress = 'https://github.com/mmistakes/minimal-mistakes'
@@ -52,6 +53,7 @@ class editTheme():
 
         subprocess.run(['cp', self.logo, 'assets/images/'])
         subprocess.run(['cp', self.avatar, 'assets/images/'])
+        subprocess.run(['cp', self.splash, 'assets/images/'])
         
         subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
         os.chdir(str('assets/images/album/' + os.path.basename(self.album)))
@@ -76,7 +78,7 @@ class editTheme():
 
         with open('index.md', 'w') as fin:
             fin.write('---\nlayout: home\n\nheader:\n  overlay_color: "#5e616c"\n  overlay_image:')
-            fin.write(str(' assets/images/' + os.path.basename(self.logo) + '\n'))
+            fin.write(str(' assets/images/' + os.path.basename(self.splash) + '\n'))
             fin.write('excerpt: >\n  <br /><br /><br />')
 
             fin.write(indexin.read()) # adding rest of index base to index.md

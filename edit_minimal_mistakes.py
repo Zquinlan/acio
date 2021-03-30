@@ -1,12 +1,7 @@
 import sys, yaml, subprocess, os
 
-# Pass the following from the gui or clt to here
-# currentDirectory ## Need this to be set. It is defined in the args dictionary
-# gPhotosLink # HAS NOT YET BEEN ADDED Need to jekyll plugin
-# Navigation and config yml have to be changed from test to final
-# Will have to rename _config file after cloning repo
 
-
+# Need to add baseurl  
 class editConfig():
     def __init__(self, args):
         super().__init__()
@@ -114,10 +109,10 @@ class editPhotoAlbum():
     def __init__(self, args):
         super().__init__()
         self.currentDirectory = args['currentDirectory']
-        self.logo = args['assetsLogo']
+        self.splash = args['assetsSplash']
 
         with open(str(self.currentDirectory + '/assets/images/album.md'), 'w+') as fout:
-            frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.logo + '\nsidebar:\n  nav: "content" \n')
+            frontmatter = str('---\nlayout: splash\nheader: \noverlay_color: "#5e616c"\noverlay_image: ' + self.splash + '\nsidebar:\n  nav: "content" \n')
             fout.write(frontmatter)
             
             fout.write('gallery:\n')
