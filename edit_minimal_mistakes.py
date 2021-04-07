@@ -25,6 +25,7 @@ class editConfig():
                 config['logo'] = args['assetsLogo']
                 config['minimal_mistakes_skin'] = args['skin']
                 config['description'] = ''
+                config['baseurl'] = os.path.basename(self.currentDirectory)
 
                 config['author']['name'] = args['authorName']
                 config['author']['bio'] =  ''
