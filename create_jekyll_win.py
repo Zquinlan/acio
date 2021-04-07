@@ -1,4 +1,4 @@
-import subprocess, os
+import subprocess, os, git
 
 class editTheme():
     def __init__(self, args):
@@ -28,7 +28,7 @@ class editTheme():
 
 
         os.chdir(self.currentDirectory)
-        subprocess.run(['git', 'clone', self.themeAddress])
+        git.Repo.clone_from(self.themeAddress, self.themeClone)
         
         #removing files not used
         
