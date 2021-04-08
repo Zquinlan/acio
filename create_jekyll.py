@@ -85,7 +85,7 @@ class editTheme():
             fin.write(readin.read())  # Adding the readme to the end of the index
         
         readin.close()
-        readin.close()
+        indexin.close()
         subprocess.run(['rm', '-rf', 'indexBase.md'])
 
         subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/home.html', '_layouts/home.html'])

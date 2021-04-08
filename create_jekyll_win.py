@@ -1,4 +1,6 @@
 import subprocess, os, git
+from dulwich import porcelain
+
 
 class editTheme():
     def __init__(self, args):
@@ -13,6 +15,7 @@ class editTheme():
         if args['theme'] == 'Minimal':
             self.themeAddress = 'https://github.com/mmistakes/minimal-mistakes'
             self.themeClone = 'minimal-mistakes'
+            self.themeDirs = 'minimalMistakes'
         # if args['theme'] == 'Gridster':
         #     self.themeAddress = 'https://github.com/DigitalMindCH/gridster-jekyll-theme'
         #     self.themeClone = 'gridster-jekyll-theme'
@@ -21,52 +24,59 @@ class editTheme():
         #git status
         # if git status is not then git init
         # git checkout -B gh-pages
-        self.themeContents = str(self.currentDirectory + '\\' + self.themeClone + '\\*.*')
+        self.themeContents = str('(' + self.currentDirectory + '\\' + self.themeClone + '\\*)')
         self.albumPath = str(self.currentDirectory + '\\assets\\images\\album\\')
         self.albumContents = str(self.currentDirectory + '\\assets\\images\\album\\' + os.path.basename(self.album))
-        self.pathToApp = os.path.dirname(__path__)
-
+        self.pathToApp = self.currentDirectory # change this to os.path.dirname(__path__) for bundling
 
         os.chdir(self.currentDirectory)
-        git.Repo.clone_from(self.themeAddress, self.themeClone)
+        porcelain.clone(self.themeAddress, self.themeClone)
         
+        self.moveThemeContents = str('for /d %d in ' + self.themeContents +' do move /Y %d ' + self.currentDirectory)
+        self.moveThemeFiles = str('for %F in ' + self.themeContents +' do move /Y %F ' + self.currentDirectory)
+        self.moveAlbum = str('for /d %d in ' + self.albumPath + ' do move /Y %d ' + self.albumContents)
         #removing files not used
+
+        subprocess.run('del /f minimal-mistakes\\README.md', shell = True) #This has to change so that it works with other themes
+        subprocess.run(self.moveThemeContents, shell = True)
+        subprocess.run(self.moveThemeFiles, shell = True)
+        subprocess.run('del /f index.html, package-lock.json, package.json, Rakefile, CHANGELOG.md, screenshot-layouts.png, screenshot.png, staticman.yml, banner.js, _includes\\author-profile.html, _includes\\footer.html, _layouts\\home.html', shell = True)
+        subprocess.run('rd /s /q docs', shell = True)
+        subprocess.run('if exist docs rd /s /q docs', shell = True)
+        subprocess.run('rd /s /q test', shell = True)
+        subprocess.run('if exist test rd /s /q test', shell = True)
+
+        self.removeThemeDir = str('rd /s /q ' + self.themeClone)
+        self.removeThemeDirIf = str('if exist ' + self.themeClone + 'rd /s /q ' + self.themeClone)
+        subprocess.run(self.removeThemeDir, shell = True)
+        subprocess.run(self.removeThemeDirIf, shell = True)
+
+        subprocess.run('mkdir assets\\images', shell = True)
+        subprocess.run('mkdir assets\\images\\album', shell = True)
+
+        photoList = [self.logo, self.avatar, self.splash]
+        for pic in photoList:
+            photoCopy = str('xcopy ' + pic + ' assets\\images\\ /Y')
+            subprocess.run(photoCopy, shell = True)
         
+        self.copyAlbumContents = str('xcopy ' + self.album + ' assets\\images\\images\\album\\ /E /C /R /Y')
+        subprocess.run(self.copyAlbumContents, shell = True)
+        subprocess.run(self.moveAlbum, shell = True)
+        self.removeEmptyAlbum = str('rmdir ' + self.albumContents)
+        subprocess.run(self.removeEmptyAlbum, shell = True)
 
-        subprocess.run('for', '\%%F', 'in', self.themeContents, 'do', 'move', '/Y', '\%%F', self.currentDirectory)
-        subprocess.run(['del', '/f', 'index.html,', 'README.md,', 'package-lock.json,', 'package.json,', 'Rakefile,', 'CHANGELOG.md,', 'screenshot-layouts.png,', 'screenshot.png,', 'staticman.yml,', 'test/,', 'banner.js,', '_includes/author-profile.html,', '_includes/footer.html,', 'docs/,', '_layouts/home.html'])
-        subprocess.run(['rmdir', self.themeClone])
-
-        subprocess.run(['mkdir', 'assets\\images'])
-        subprocess.run(['mkdir', 'assets\\images\\album'])
-
-        subprocess.run(['xcopy', self.logo, 'assets\\images\\'])
-        subprocess.run(['xcopy', self.avatar, 'assets\\images\\'])
-        subprocess.run(['xcopy', self.splash, 'assets\\images\\'])
-        
-        subprocess.run(['xcopy', self.album, 'assets\\images\\album\\', '/E', '/C', '/R'])
-        subprocess.run('for', '\%%F', 'in', self.albumPath, 'do', 'move', '/Y', '\%%F', self.albumContents)
-        subprocess.run(['rmdir', self.albumContents])
-
-        subprocess.run(['rename', '_config.yml', '_config_template.yml'])
-        subprocess.run(['rename', '_data/navigation.yml', '_data/navigation_template.yml'])
-        subprocess.run(['rename', 'LICENSE', 'theme_LICENSE'])      
+        subprocess.run('rename _config.yml _config_template.yml', shell = True)
+        subprocess.run('rename _data\\navigation.yml _data\\navigation_template.yml', shell = True)
+        subprocess.run('rename LICENSE theme_LICENSE', shell = True)      
 
         #Need to be able to add these files. Maybe git clone from the acio GH?
         #Copy in pages and images for acio
         #Index file for mainpage of website
 
-        self.appPages = str(self.pathToApp + '\\' + self.themeClone + '\\pages\\')
-        self.appIndex = str(self.appPages + 'indexBase.md')
-        self.appHome = str(self.appPages + 'home.html')
-        self.appContents = str(self.appPages + 'repoContents.png')
-        self.appPaper = str(self.appPages + 'paper.jpg')
-        self.appPhotos = str(self.appPages + 'photos.jpg')
-        self.appProfile = str(self.appPages + 'author-profile.html')
-        self.appFooter = str(self.appPages + 'footer.html')
-
-
-        subprocess.run(['xcopy', self.appIndex, self.currentDirectory]) 
+        self.appPages = str(self.pathToApp + '\\' + self.themeDirs + '\\pages\\')
+        self.appIndex = str('xcopy ' + self.appPages + 'indexBase.md ' + self.currentDirectory + ' /Y')
+        
+        subprocess.run(self.appIndex, shell = True) 
 
         readin = open('README.md', 'r')
         indexin = open('indexBase.md', 'r')
@@ -83,20 +93,26 @@ class editTheme():
             fin.write(readin.read())  # Adding the readme to the end of the index
         
         readin.close()
-        readin.close()
-        subprocess.run(['del', '/f', 'indexBase.md'])
+        indexin.close()
+        subprocess.run('del /f indexBase.md', shell = True)
 
-        subprocess.run(['xcopy', self.appHome, '_layouts\\home.html'])
-        subprocess.run(['xcopy', self.appContents, 'assets\\images\\'])
-        subprocess.run(['xcopy', self.appPaper, 'assets\\images\\'])
-        subprocess.run(['xcopy', self.appPhotos, 'assets\\images\\'])
-        subprocess.run(['xcopy', self.appProfile, '_includes\\'])
-        subprocess.run(['xcopy', self.appFooter, '_includes\\'])
+        self.appHome = str('xcopy ' + self.appPages + ' home.html _layouts\\home.html /Y')
+        self.appContents = str('xcopy ' + self.appPages + ' repoContents.png assets\\images\\ /Y')
+        self.appPaper = str('xcopy ' + self.appPages + ' paper.jpg assets\\images\\ /Y')
+        self.appPhotos = str('xcopy ' + self.appPages + ' photos.jpg assets\\images\\ /Y')
+        self.appProfile = str('xcopy ' + self.appPages + ' author-profile.html _includes\\ /Y')
+        self.appFooter = str('xcopy ' + self.appPages + ' footer.html _includes\\ /Y')
+
+        subprocess.run(self.appHome, shell = True)
+        subprocess.run(self.appContents, shell = True)
+        subprocess.run(self.appPaper, shell = True)
+        subprocess.run(self.appPhotos, shell = True)
+        subprocess.run(self.appProfile, shell = True)
+        subprocess.run(self.appFooter, shell = True)
 
 
 #For testing purposes
 
 if __name__ == '__main__':
-    createArgs = {'currentDirectory' = , 'absoluteLogo' = , 'absoluteAlbum' = , 'absoluteAvatar' = , 'absoluteSplash' = , 'theme' = }
-    editContents(args = createArgs)
-
+    createArgs = {'currentDirectory' : 'C:\\Users\\zquinlan\\Documents\\test', 'absoluteLogo' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteAlbum' : 'C:\\Users\\zquinlan\\Documents\\temp', 'absoluteAvatar' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteSplash' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'theme' : 'Minimal'}
+    editTheme(args = createArgs)
