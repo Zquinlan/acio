@@ -2,7 +2,7 @@ import subprocess, os, git
 from dulwich import porcelain
 
 
-class editTheme():
+class editThemeWin():
     def __init__(self, args):
         super().__init__()
 
@@ -30,7 +30,7 @@ class editTheme():
         self.pathToApp = self.currentDirectory # change this to os.path.dirname(__path__) for bundling
 
         os.chdir(self.currentDirectory)
-        porcelain.clone(self.themeAddress, self.themeClone)
+        # porcelain.clone(self.themeAddress, self.themeClone)
         
         self.moveThemeContents = str('for /d %d in ' + self.themeContents +' do move /Y %d ' + self.currentDirectory)
         self.moveThemeFiles = str('for %F in ' + self.themeContents +' do move /Y %F ' + self.currentDirectory)
@@ -59,14 +59,14 @@ class editTheme():
             photoCopy = str('xcopy ' + pic + ' assets\\images\\ /Y')
             subprocess.run(photoCopy, shell = True)
         
-        self.copyAlbumContents = str('xcopy ' + self.album + ' assets\\images\\images\\album\\ /E /C /R /Y')
+        self.copyAlbumContents = str('xcopy ' + self.album + ' assets\\images\\album\\ /E /C /R /Y')
         subprocess.run(self.copyAlbumContents, shell = True)
         subprocess.run(self.moveAlbum, shell = True)
         self.removeEmptyAlbum = str('rmdir ' + self.albumContents)
         subprocess.run(self.removeEmptyAlbum, shell = True)
 
         subprocess.run('rename _config.yml _config_template.yml', shell = True)
-        subprocess.run('rename _data\\navigation.yml _data\\navigation_template.yml', shell = True)
+        subprocess.run('rename _data\\navigation.yml navigation_template.yml', shell = True)
         subprocess.run('rename LICENSE theme_LICENSE', shell = True)      
 
         #Need to be able to add these files. Maybe git clone from the acio GH?
@@ -74,6 +74,7 @@ class editTheme():
         #Index file for mainpage of website
 
         self.appPages = str(self.pathToApp + '\\' + self.themeDirs + '\\pages\\')
+        self.appImages = str(self.pathToApp + '\\' + self.themeDirs + '\\images\\')
         self.appIndex = str('xcopy ' + self.appPages + 'indexBase.md ' + self.currentDirectory + ' /Y')
         
         subprocess.run(self.appIndex, shell = True) 
@@ -93,15 +94,15 @@ class editTheme():
             fin.write(readin.read())  # Adding the readme to the end of the index
         
         readin.close()
-        indexin.close()
+        readin.close()
         subprocess.run('del /f indexBase.md', shell = True)
 
-        self.appHome = str('xcopy ' + self.appPages + ' home.html _layouts\\home.html /Y')
-        self.appContents = str('xcopy ' + self.appPages + ' repoContents.png assets\\images\\ /Y')
-        self.appPaper = str('xcopy ' + self.appPages + ' paper.jpg assets\\images\\ /Y')
-        self.appPhotos = str('xcopy ' + self.appPages + ' photos.jpg assets\\images\\ /Y')
-        self.appProfile = str('xcopy ' + self.appPages + ' author-profile.html _includes\\ /Y')
-        self.appFooter = str('xcopy ' + self.appPages + ' footer.html _includes\\ /Y')
+        self.appHome = str('xcopy ' + self.appPages + 'home.html _layouts\\ /Y')
+        self.appContents = str('xcopy ' + self.appImages + 'repoContents.png assets\\images\\ /Y')
+        self.appPaper = str('xcopy ' + self.appImages + 'paper.jpg assets\\images\\ /Y')
+        self.appPhotos = str('xcopy ' + self.appImages + 'photos.jpg assets\\images\\ /Y')
+        self.appProfile = str('xcopy ' + self.appPages + 'author-profile.html _includes\\ /Y')
+        self.appFooter = str('xcopy ' + self.appPages + 'footer.html _includes\\ /Y')
 
         subprocess.run(self.appHome, shell = True)
         subprocess.run(self.appContents, shell = True)
@@ -113,6 +114,6 @@ class editTheme():
 
 #For testing purposes
 
-if __name__ == '__main__':
-    createArgs = {'currentDirectory' : 'C:\\Users\\zquinlan\\Documents\\test', 'absoluteLogo' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteAlbum' : 'C:\\Users\\zquinlan\\Documents\\temp', 'absoluteAvatar' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteSplash' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'theme' : 'Minimal'}
-    editTheme(args = createArgs)
+# if __name__ == '__main__':
+#     createArgs = {'currentDirectory' : 'C:\\Users\\zquinlan\\Documents\\test', 'absoluteLogo' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteAlbum' : 'C:\\Users\\zquinlan\\Documents\\temp', 'absoluteAvatar' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'absoluteSplash' : 'C:\\Users\\zquinlan\\Documents\\test\\Acio_design_v0.01.png', 'theme' : 'Minimal'}
+#     editTheme(args = createArgs)
