@@ -27,7 +27,8 @@ class themeScroll(QWidget):
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         scroll.setWidgetResizable(True)
-        scroll.themeSelected = ''
+        
+        self.themeSelected = ''
 
         #Defining scroll area
         radioButtonContent = QWidget()
@@ -48,7 +49,7 @@ class themeScroll(QWidget):
             self.themeSelect.toggled.connect(self.onClicked)
 
             self.themeImage = QLabel(theme)
-            img = QPixmap("./theme_images/%s.png" % theme) # This needs to change so that it will work on mac or windows
+            img = QPixmap("./src/theme_images/%s.png" % theme) # This needs to change so that it will work on mac or windows
             img = img.scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.themeImage.setPixmap(img)
 
@@ -343,9 +344,6 @@ class mainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = 'Ac.Io'
-        self.geometry = app.desktop().availableGeometry()
-        self.height = self.geometry.height()
-        self.width = self.geometry.height()
 
         if sys.platform == "linux" or sys.platform == "linux2":
             self.key = "Ctrl"
@@ -603,7 +601,7 @@ class mainWindow(QMainWindow):
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):
 
-
+            mkErr = "no repository selected"
             message = QMessageBox.question(self, "Error", "No Directory selected", QMessageBox.Cancel, QMessageBox.Cancel)
 
         if os.path.isdir(currentDirectory): 
@@ -622,10 +620,8 @@ class mainWindow(QMainWindow):
             self.statusBar().clearMessage()
             self.statusBar().showMessage('Ready')
             
-
+            mkErr = ''
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
-
-
         
 
 if __name__ == '__main__':

@@ -1,4 +1,10 @@
-from acio_gui import *
+from acio_gui import*
+from PyQt5 import QtCore
 
-def gui_test():
-	assert mainWindow.title == 'Ac.Io'
+
+def test_gui(qtbot):
+    widget = mainWindow()
+    qtbot.addWidget(widget)
+
+    assert widget.mkFramework.text() == "Acio Website"
+    
