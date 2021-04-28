@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: AcIO
 
     runs-on: ubuntu-latest
 
