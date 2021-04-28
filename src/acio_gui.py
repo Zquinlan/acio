@@ -177,7 +177,7 @@ class socialPop(QDialog):
 
         self.twitterLink = QLineEdit(self)
 
-        twitterExp = QRegExp("\w*")
+        twitterExp = QRegExp("\\w*")
         input_validator = QRegExpValidator(twitterExp, self.twitterLink)
         self.twitterLink.setValidator(input_validator)
         self.twitterLink.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
