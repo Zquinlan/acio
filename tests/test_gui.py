@@ -1,4 +1,4 @@
-import acio_gui
+from acio_gui import *
 
 def gui_test():
-	assert acio_gui.mainWindow.title == 'Ac.Io'
+	assert mainWindow.title == 'Ac.Io'
