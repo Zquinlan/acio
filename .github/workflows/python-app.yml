@@ -13,12 +13,7 @@ jobs:
   build:
     name: acio_gui
 
-    runs-on: ${{ matrix.os}}
-    strategy:
-      matrix:
-        include:
-        - os: macos-latest
-        - os: windows-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
