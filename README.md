@@ -1,4 +1,4 @@
- # Academia_to_io (Ac.Io Website)
+# Academia_to_io (Ac.Io Website)
 
 # This tool is currently in development; there is a working version for mac users. If you are intersted in testing this tool out on your own repository please contact me (Zach).
 
