@@ -3,10 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['src/acio_gui.py'],
+a = Analysis(['acio_gui.py'],
              pathex=['.'],
              binaries=[],
-             datas=[('src/theme_images/Alembic.png', '.'), ('src/theme_images/Bulma.png', '.'), ('src/theme_images/Minimal.png', '.'), ('src/Acio_design_v0.01.png', '.')],
+             datas=[('theme_images/Alembic.png', '.'), ('theme_images/Bulma.png', '.'), ('theme_images/Minimal.png', '.'), ('Acio_design_v0.01.png', '.')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.datas,
           [],
           name='acio_gui',
-          icon='src/Acio_design_v0.01.png',
+          icon='Acio_design_v0.01.png',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
