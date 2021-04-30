@@ -20,6 +20,12 @@ from create_md import editContents
 class themeScroll(QWidget):
     def __init__ (self):
         super().__init__()
+
+        def resource_path(relative_path):
+             if hasattr(sys, '_MEIPASS'):
+                 return os.path.join(sys._MEIPASS, relative_path)
+             return os.path.join(os.path.abspath("."), relative_path)
+
         total_layout = QVBoxLayout(self)
         self.setLayout(total_layout)
 
@@ -49,7 +55,7 @@ class themeScroll(QWidget):
             self.themeSelect.toggled.connect(self.onClicked)
 
             self.themeImage = QLabel(theme)
-            img = QPixmap("./src/theme_images/%s.png" % theme) # This needs to change so that it will work on mac or windows
+            img = QPixmap(resource_path("%s.png" % theme)) # This needs to change so that it will work on mac or windows
             img = img.scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.themeImage.setPixmap(img)
 
@@ -354,7 +360,6 @@ class mainWindow(QMainWindow):
 
         self.createMenuBar()
         self.initUI()
-
 
     def createMenuBar(self):
         # Making the Menu bar
