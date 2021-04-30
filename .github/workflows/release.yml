@@ -1,9 +1,14 @@
 name: Build GUI exe with Pyinstaller
 
+#on:
+#  release:
+#    types: [created]
 on:
-  release:
-    types: [created]
-    
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'test build tags'
+        
 jobs:
   build:
 
