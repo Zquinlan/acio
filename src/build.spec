@@ -4,7 +4,6 @@ block_cipher = None
 
 
 a = Analysis(['acio_gui.py'],
-             pathex=['.'],
              binaries=[],
              datas=[('theme_images/Alembic.png', '.'), ('theme_images/Bulma.png', '.'), ('theme_images/Minimal.png', '.'), ('Acio_design_v0.01.png', '.')],
              hiddenimports=[],
@@ -31,4 +30,5 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , manifest='akespec')
+          console=True , 
+          manifest='src/')
