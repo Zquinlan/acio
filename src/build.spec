@@ -5,7 +5,7 @@ block_cipher = None
 
 a = Analysis(['acio_gui.py'],
              binaries=[],
-             datas=[('theme_images/Alembic.png', '.'), ('theme_images/Bulma.png', '.'), ('theme_images/Minimal.png', '.'), ('Acio_design_v0.01.png', '.')],
+             datas=[('theme_images/Alembic.png', '.'), ('theme_images/Bulma.png', '.'), ('theme_images/Minimal.png', '.'), ('Acio_design_v0.01.png', '.'), ('Acio_design_v0.01.ico', '.')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
