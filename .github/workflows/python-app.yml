@@ -3,11 +3,17 @@
 
 name: acio_gui
 
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test build'
 
 jobs:
   build:
