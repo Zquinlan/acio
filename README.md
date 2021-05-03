@@ -8,4 +8,4 @@
 ## Developers:
 - Zach Quinlan
     - [contact](mailto:zquinlan@gmail.com)
-- [Nick Quinlan](github.com/nquinlan)
+- [Nick Quinlan](https://github.com/nquinlan)
