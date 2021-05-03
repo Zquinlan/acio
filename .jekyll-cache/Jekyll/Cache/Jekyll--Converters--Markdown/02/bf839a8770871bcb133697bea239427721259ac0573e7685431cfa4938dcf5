@@ -1,0 +1,110 @@
+I"Ö
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/assets/images/join.jpg" alt="join" />
+            
+          </div>
+        
+
+        <div class="archive__item-body">
+          
+            <h2 class="archive__item-title">Current Members</h2>
+          
+
+          
+
+          
+            <p><a href="/labMembers/#students" class="btn btn--primary">Learn more</a></p>
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/assets/images/join.jpg" alt="join" />
+            
+          </div>
+        
+
+        <div class="archive__item-body">
+          
+            <h2 class="archive__item-title">Join the Lab</h2>
+          
+
+          
+
+          
+            <p><a href="/joinUs/" class="btn btn--primary">Learn more</a></p>
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+<h1 id="students">Students</h1>
+<hr />
+
+<p><img src="/assets/images/zaq2020.jpg" alt="image-left" class="align-left" /></p>
+<h2 id="zach-quinlan">Zach Quinlan</h2>
+<h3 id="nsf-grfp-scholar--3rd-year-phd-student">NSF GRFP scholar â€“ 3rd year PhD student</h3>
+<p>I am extremely fascinated by coral exometabolomes and the hidden insights they can give us into the functioning of the coral holobiont. I am currently trying to leverage our collaborations with the mass spectrometry community to pursue greater insights into how chemical ecology can help with coral reef mamangement and restoration.</p>
+
+<p><a href="mailto:zquinlan@gmail.com"><i class="far fa-envelope"></i> Email</a> 
+<a href="https://scholar.google.com/citations?hl=en&amp;user=JWgTkFcAAAAJ"><i class="fab fa-google" style="color:black"></i> Google Scholar</a><br />
+<a href="https://www.twitter.com/zquinlan"><i class="fab fa-twitter" stlye="color:#1DA1F2"></i> Twitter</a>
+<a href="https://www.researchgate.net/profile/zachary-quinlan"><i class="fab fa-researchgate" style="color:#5CC9BB"></i> ResearchGate</a><br />
+<a href="https://github.com/zquinlan"><i class="fab fa-github" style="color:black"></i> Github</a> 
+<a href="https://orcid.org/0000-0002-0351-8927"><i class="fab fa-orcid" style="color:#AECD54"></i> OrcID</a> <br />
+<a href="/labMembers/cv/Quinlan_CV.pdf"><i class="far fa-file-pdf"></i> CV</a></p>
+
+<!-- <br />
+<br />
+![image-left](/assets/images/emily2021.jpg){: .align-left}
+## Emily Nixon
+### 1st year PhD Student
+
+
+<a href="mailto:@gmail.com"><i class='far fa-envelope'></i> Email</a> 
+<a href="https://www.twitter.com/"><i class='fab fa-twitter' stlye="color:#1DA1F2"></i> Twitter</a> 
+<a href="https://www.researchgate.net/profile/"><i class="fab fa-researchgate" style="color:#5CC9BB"></i> ResearchGate</a>  
+<a href="https://github.com/"><i class="fab fa-github" style="color:black"></i> Github</a> 
+<a href="https://orcid.org/"><i class="fab fa-orcid" style="color:#AECD54"></i> OrcID</a> 
+<a href="/labMembers/cv/.pdf"><i class="far fa-file-pdf"></i> CV</a> 
+<a href="https://scholar.google.com/"><i class="fab fa-google" style="color:black"></i> Google Scholar</a>
+
+<br />
+<br />
+![image-left](/assets/images/catherine2021.jpg){: .align-left}
+## Catherine Mullenmeister
+### 1st year PhD Student (Co-advised by Dr. Jen Smith)
+
+
+<a href="mailto:@gmail.com"><i class='far fa-envelope'></i> Email</a> 
+<a href="https://www.twitter.com/"><i class='fab fa-twitter' stlye="color:#1DA1F2"></i> Twitter</a> 
+<a href="https://www.researchgate.net/profile/"><i class="fab fa-researchgate" style="color:#5CC9BB"></i> ResearchGate</a>  
+<a href="https://github.com/"><i class="fab fa-github" style="color:black"></i> Github</a> 
+<a href="https://orcid.org/"><i class="fab fa-orcid" style="color:#AECD54"></i> OrcID</a> 
+<a href="/labMembers/cv/.pdf"><i class="far fa-file-pdf"></i> CV</a>  -->
+
+<p><br />
+<br />
+<br /></p>
+
+<h1 id="our-fearless-leader">Our Fearless Leader:</h1>
+<hr />
+
+<p><img src="/assets/images/fearlessLeader.jpg" alt="image-left" class="alight-left" /></p>
+<h2 id="linda-wegley-kelly">Linda Wegley Kelly</h2>
+<p>Always in search of her next dose of sugar.<br />
+<a href="mailto:lwegley@ucsd.edu"><i class="far fa-envelope"></i> Email</a></p>
+:ET

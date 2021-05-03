@@ -1,0 +1,25 @@
+Zach Quinlan:
+  name        : "Zach Quinlan"
+  bio         : "Hugger of rocks, kisser of coral. Moonlighting as a PhD student while mostly dirt bagging in the dessert to code. I am extremely fascinated by coral exometabolomes and the hidden insights they can give us into the functioning of the coral holobiont."
+  avatar      : "/assets/images/zaq2020.jpg"
+  links:
+  - icon: "fas fa-fw fa-link"
+    label: Curriculum Vitae
+    url: /docs/cv/zaq/
+  - icon: fab fa-fw fa-twitter-square
+    label: Twitter
+    url: https://www.twitter.com/zquinlan
+  - icon: fab fa-researchgate
+    label: ResearchGate
+    url: https://www.researchgate.net/profile/zachary-quinlan
+  - icon: fab fa-fw fa-github
+    label: Github
+    url: https://github.com/zquinlan
+  - icon: fab fa-orcid
+    label: OrcID
+    url: https://orcid.org/0000-0002-0351-8927
+
+Linda Wegley Kelly:
+  name : "Linda Wegley Kelly"
+  bio : "Our fearless leader looking for her next dose of sugar"
+  avatar : "/assets/images/fearelessLeader.jpg"

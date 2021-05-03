@@ -1,0 +1,18 @@
+content:
+- title: About
+  url: "/about/"
+- title: Tutorial
+  url: "/tutorial/"
+- title: Contact
+  url: "/contact/"
+
+
+main:
+- title: About
+  url: "/about/"
+- title: Tutorial
+  url: "/tutorial/"
+- title: Contact
+  url: "/contact/"
+
+
