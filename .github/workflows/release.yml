@@ -12,7 +12,12 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+        - os: macos-latest
+        - os: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -34,5 +39,6 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: Acio_windows
+        name: Acio
         path: dist
+        retention-days: 7
