@@ -25,6 +25,7 @@ class editTheme():
 
         os.chdir(self.currentDirectory)
         subprocess.run(['git', 'clone', self.themeAddress]) 
+        # porcelain.clone(self.themeAddress, self.themeClone)
         os.chdir(self.themeClone)
         
         #removing files not used

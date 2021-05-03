@@ -7,3 +7,4 @@ PyYAML==5.4.1
 QDarkStyle==2.8.1
 pytest-qt==3.3.0
 pyinstaller
+dulwich

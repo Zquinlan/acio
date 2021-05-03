@@ -3,9 +3,14 @@ import qdarkstyle
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+# mac and linux scripts
 from edit_minimal_mistakes import*
 from create_jekyll import editTheme
 from create_md import editContents
+# Windows scripts
+from edit_minimal_mistakes_win import *
+from create_jekyll_win import editThemeWin
+from create_md_win import editContentsWin
 
 #Things to add:
 #   Minimal theme optional colors
@@ -530,6 +535,8 @@ class mainWindow(QMainWindow):
 
     def photosClick(self):
         self.popout = gPhotosPop()
+        self.statusBar().clearMessage()
+        self.statusBar().showMessage('Photos updated')
 
         # Set placeholder text if no user input; Set regular text if user input previously supplied
         if not self.localLogoLink == '':
@@ -556,6 +563,8 @@ class mainWindow(QMainWindow):
 
 
     def socialClick(self):
+        self.statusBar().clearMessage()
+        self.statusBar().showMessage('Social links updated')
         self.social = socialPop()
 
         if not self.twitterHandle == '':
@@ -590,6 +599,8 @@ class mainWindow(QMainWindow):
 
     def makeClick(self):
         currentDirectory = self.dir.searchDirectory.text()
+        self.statusBar().clearMessage()
+        self.statusBar().showMessage('Investigating repository')
        
         self.absoluteLogoLink = self.localLogoLink
         self.absoluteAvatarLink = self.localAvatarLink
@@ -616,22 +627,31 @@ class mainWindow(QMainWindow):
 
         if os.path.isdir(currentDirectory): 
 
-            self.statusBar().clearMessage()
-            self.statusBar().showMessage('Investigating repository')
-            self.mkcontent = editContents(args = configArgs)
+            if self.system == 'mac' or self.system == 'linux':
+                self.mkcontent = editContents(args = configArgs)
 
-            self.statusBar().clearMessage()
-            self.statusBar().showMessage('Creating website theme')
-            self.mkClone = editTheme(args = configArgs)
-            self.mkConfig = editConfig(args = configArgs)
-            self.mkNavigation = editNavigation(args = configArgs)
-            self.mkAlbum = editPhotoAlbum(args = configArgs)
+                self.statusBar().clearMessage()
+                self.statusBar().showMessage('Cloning website theme from Github')
+                self.mkClone = editTheme(args = configArgs)
+                self.mkConfig = editConfig(args = configArgs)
+                self.mkNavigation = editNavigation(args = configArgs)
+                self.mkAlbum = editPhotoAlbum(args = configArgs)
 
-            self.statusBar().clearMessage()
-            self.statusBar().showMessage('Ready')
-            
-            mkErr = ''
-            message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
+                self.statusBar().clearMessage()
+                self.statusBar().showMessage('Ready')
+
+            if self.system == 'windows':
+                self.mkcontent = editContentsWin(args = configArgs)
+
+                self.statusBar().clearMessage()
+                self.statusBar().showMessage('Cloning website theme from Github')
+                self.mkClone = editThemeWin(args = configArgs)
+                self.mkConfig = editConfigWin(args = configArgs)
+                self.mkNavigation = editNavigationWin(args = configArgs)
+                self.mkAlbum = editPhotoAlbumWin(args = configArgs)
+
+                self.statusBar().clearMessage()
+                self.statusBar().showMessage('Ready')
         
 
 if __name__ == '__main__':
