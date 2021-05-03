@@ -68,7 +68,7 @@ class editTheme():
         #Need to be able to add these files. Maybe git clone from the acio GH?
         #Copy in pages and images for acio
         #Index file for mainpage of website
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/indexBase.md', '.'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/pages/indexBase.md', '.'])
 
         readin = open('README.md', 'r')
         indexin = open('indexBase.md', 'r')
@@ -88,12 +88,12 @@ class editTheme():
         indexin.close()
         subprocess.run(['rm', '-rf', 'indexBase.md'])
 
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/home.html', '_layouts/home.html'])
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/repoContents.png', 'assets/images/'])
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/paper.jpg', 'assets/images/'])
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/images/photos.jpg', 'assets/images/'])
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/author-profile.html', '_includes/'])
-        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/minimalMistakes/pages/footer.html', '_includes/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/pages/home.html', '_layouts/home.html'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/images/repoContents.png', 'assets/images/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/images/paper.jpg', 'assets/images/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/images/photos.jpg', 'assets/images/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/pages/author-profile.html', '_includes/'])
+        subprocess.run(['cp', '/Users/zacharyquinlan/Documents/Github/acio/src/minimalMistakes/pages/footer.html', '_includes/'])
         #create docs/ directory
 
         # with open('Gemfile', 'r+') as fin:

@@ -4,9 +4,6 @@ class editContents():
     def __init__(self, args):
         super().__init__()
 
-
-
-
         self.currentDirectory = args['currentDirectory']
         self.logo = args['assetsLogo']
 

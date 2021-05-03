@@ -27,7 +27,7 @@ class editThemeWin():
         self.themeContents = str('(' + self.currentDirectory + '\\' + self.themeClone + '\\*)')
         self.albumPath = str(self.currentDirectory + '\\assets\\images\\album\\')
         self.albumContents = str(self.currentDirectory + '\\assets\\images\\album\\' + os.path.basename(self.album))
-        self.pathToApp = self.currentDirectory # change this to os.path.dirname(__path__) for bundling
+        self.pathToApp = os.path.dirname(__path__)
 
         os.chdir(self.currentDirectory)
         # porcelain.clone(self.themeAddress, self.themeClone)
