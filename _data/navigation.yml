@@ -3,6 +3,10 @@ content:
   url: "/about/"
 - title: Tutorial
   url: "/tutorial/"
+- title: Updates
+  url: "/update/"
+- title: issues
+  url: "/issues/"
 - title: Contact
   url: "/contact/"
 
@@ -12,6 +16,10 @@ main:
   url: "/about/"
 - title: Tutorial
   url: "/tutorial/"
+- title: Future
+  url: "/future/"
+- title: issues
+  url: "/issues/"
 - title: Contact
   url: "/contact/"
 

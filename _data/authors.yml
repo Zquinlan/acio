@@ -1,6 +1,6 @@
 Zach Quinlan:
   name        : "Zach Quinlan"
-  bio         : "Hugger of rocks, kisser of coral. Moonlighting as a PhD student while mostly dirt bagging in the dessert to code. I am extremely fascinated by coral exometabolomes and the hidden insights they can give us into the functioning of the coral holobiont."
+  bio         : "Coral reef biogeochemist and data scientist"
   avatar      : "/assets/images/zaq2020.jpg"
   links:
   - icon: "fas fa-fw fa-link"
@@ -19,7 +19,7 @@ Zach Quinlan:
     label: OrcID
     url: https://orcid.org/0000-0002-0351-8927
 
-Linda Wegley Kelly:
-  name : "Linda Wegley Kelly"
-  bio : "Our fearless leader looking for her next dose of sugar"
-  avatar : "/assets/images/fearelessLeader.jpg"
+Nicholas Quinlan:
+  name : "Nicholas Quinlan"
+  bio : "Senior Partner at Major League Hacking"
+  avatar : "/assets/images/nick.jpg"
