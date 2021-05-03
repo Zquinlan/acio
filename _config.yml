@@ -11,7 +11,7 @@ analytics:
 atom_feed:
   hide: null
   path: null
-baseurl: "{{ site.baseurl }}"
+baseurl: /
 bing_site_verification: null
 category_archive:
   path: /categories/
