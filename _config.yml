@@ -1,37 +1,13 @@
-algolia:
-  application_id: null
-  index_name: null
-  powered_by: null
-  search_only_api_key: null
 analytics:
   google:
     anonymize_ip: null
     tracking_id: null
   provider: false
-atom_feed:
-  hide: null
-  path: null
 baseurl: /{{ site.baseurl }}
 bing_site_verification: null
 category_archive:
   path: /categories/
   type: liquid
-comments:
-  discourse:
-    server: null
-  disqus:
-    shortname: null
-  facebook:
-    appid: null
-    colorscheme: null
-    num_posts: null
-  provider: null
-  staticman:
-    branch: null
-    endpoint: null
-  utterances:
-    issue_term: null
-    theme: null
 compress_html:
   clippings: all
   ignore:
@@ -133,8 +109,6 @@ plugins:
 - jekyll-paginate
 - jekyll-sitemap
 - jekyll-gist
-- jekyll-feed
-- jekyll-include-cache
 reCaptcha:
   secret: null
   siteKey: null
