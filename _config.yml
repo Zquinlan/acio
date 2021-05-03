@@ -11,7 +11,7 @@ analytics:
 atom_feed:
   hide: null
   path: null
-baseurl: /{{ site.baseurl }}
+baseurl: {{ site.baseurl }}
 bing_site_verification: null
 category_archive:
   path: /categories/
@@ -50,8 +50,6 @@ defaults:
 description: ''
 encoding: utf-8
 excerpt_separator: '
-
-
   '
 exclude:
 - '*.sublime-project'
@@ -165,6 +163,8 @@ whitelist:
 - jekyll-paginate
 - jekyll-sitemap
 - jekyll-gist
+- jekyll-feed
+- jekyll-include-cache
 words_per_minute: 200
 yandex_site_verification: null
 author:
