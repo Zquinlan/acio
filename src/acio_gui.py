@@ -361,11 +361,6 @@ class mainWindow(QMainWindow):
         self.createMenuBar()
         self.initUI()
 
-    def resource_path(relative_path):
-        if hasattr(sys, '_MEIPASS'):
-            return os.path.join(sys._MEIPASS, relative_path)
-         return os.path.join(os.path.abspath("."), relative_path)
-
     def createMenuBar(self):
         # Making the Menu bar
         mainMenu = self.menuBar()
@@ -507,6 +502,11 @@ class mainWindow(QMainWindow):
         self.emailHandle = ''
 
         layout.addWidget(self.socialButton)
+
+        def resource_path(relative_path):
+         if hasattr(sys, '_MEIPASS'):
+             return os.path.join(sys._MEIPASS, relative_path)
+         return os.path.join(os.path.abspath("."), relative_path)
 
         # Make website button
         acioIcon = QIcon(resource_path('Acio_design_v0.01.png'))
