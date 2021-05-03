@@ -1,4 +1,4 @@
-import subprocess, os, git
+import subprocess, os
 from dulwich import porcelain
 
 
