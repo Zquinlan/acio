@@ -30,7 +30,7 @@ class editThemeWin():
         self.pathToApp = self.currentDirectory # change to some working version of this when bundling os.path.dirname(__path__)
 
         os.chdir(self.currentDirectory)
-        # porcelain.clone(self.themeAddress, self.themeClone)
+        porcelain.clone(self.themeAddress, self.themeClone)
         
         self.moveThemeContents = str('for /d %d in ' + self.themeContents +' do move /Y %d ' + self.currentDirectory)
         self.moveThemeFiles = str('for %F in ' + self.themeContents +' do move /Y %F ' + self.currentDirectory)
