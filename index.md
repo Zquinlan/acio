@@ -15,14 +15,14 @@ feature_row:
     url: "/about/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
-  - image_path: /assets/images/tutorial.png
+  - image_path: /assets/images/tutorial.jpg
     alt: "Tutorial"
     title: "Tutorial"
     excerpt: "How to use AcIo to generate your own github hosted website"
     url: "/tutorial/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
-  - image_path: /assets/images/contact.jpg
+  - image_path: /assets/images/contact.png
     alt: "contact us"
     title: "Contact Us!"
     excerpt: "Get involved, get help or post issues"
