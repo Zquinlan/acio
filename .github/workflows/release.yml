@@ -24,7 +24,7 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: Acio
+        name: Acio_windows
         path: dist/windows
 
     - name: Package Application Linux
@@ -34,5 +34,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: name-of-artifact
+        name: Acio_linux
         path: dist/linux
