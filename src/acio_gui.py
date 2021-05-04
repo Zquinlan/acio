@@ -625,7 +625,7 @@ class mainWindow(QMainWindow):
 
         if os.path.isdir(currentDirectory): 
 
-            if self.system == 'mac' or self.system == 'linux':
+            if self.system == 'darwin' or self.system == 'linux':
                 self.mkcontent = editContents(args = configArgs)
 
                 self.statusBar().clearMessage()
