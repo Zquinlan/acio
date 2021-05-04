@@ -27,7 +27,6 @@ Coral reef biogeochemist and data scientist. I am pursuing my PhD to help save c
 <a href="https://www.researchgate.net/profile/zachary-quinlan"><i class="fab fa-researchgate" style="color:#5CC9BB"></i> ResearchGate</a>  
 <a href="https://github.com/zquinlan"><i class="fab fa-github" style="color:black"></i> Github</a> 
 <a href="https://orcid.org/0000-0002-0351-8927"><i class="fab fa-orcid" style="color:#AECD54"></i> OrcID</a>   
-<a href="{{site.baseurl}}/labMembers/cv/Quinlan_CV.pdf"><i class="far fa-file-pdf"></i> CV</a>  
 
 
 <br />
@@ -38,3 +37,5 @@ Coral reef biogeochemist and data scientist. I am pursuing my PhD to help save c
 ## Nick Quinlan
 Senior partner at Major League Hacking
 <a href="mailto:Nick@nicholasquinlan.com"><i class='far fa-envelope'></i> Email</a> 
+<a href="https://www.twitter.com/yaynickq"><i class='fab fa-twitter' stlye="color:#1DA1F2"></i> Twitter</a>
+<a href="https://github.com/nquinlan"><i class="fab fa-github" style="color:black"></i> Github</a> 
