@@ -18,13 +18,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Tutorial",
-        "excerpt":"Mac tutorial  Windows tutorial  ","categories": [],
+        "excerpt":"If you would like to help beta test AcIo, please email Zach to recieve the application executables. If you are running AcIo on windows you will have to download Git for windows if you have not previously done so. You will also have to setup your login credentials differently from...","categories": [],
         "tags": [],
         "url": "/tutorial/",
         "teaser": null
       },{
         "title": "Update",
-        "excerpt":"Most recent updates: Release of AcIo open Beta! Future additions to be made to AcIO: Gihub Github sign in Github total integration into GUI Speeding up windows github GUI Edit AcIO generated website option Add page option Add posts option Update image folder option Version 2 Options for SEO so...","categories": [],
+        "excerpt":"Most recent updates: Release of AcIo open Beta! Future additions to be made to AcIO: Gihub Github sign in Github total integration into GUI Speeding up windows github GUI Edit AcIO generated website option README as optional argument Add page option Add posts option Update image folder option Version 2...","categories": [],
         "tags": [],
         "url": "/update/",
         "teaser": null
