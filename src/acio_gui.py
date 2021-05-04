@@ -12,15 +12,6 @@ from edit_minimal_mistakes_win import *
 from create_jekyll_win import editThemeWin
 from create_md_win import editContentsWin
 
-#Things to add:
-#   Minimal theme optional colors
-#   Github sign in authentication?
-#   Bio photo
-
-#   Probably have to make photos either local or google for now radio buttons
-    # Best way will code radio buttons to change a variable (photoChoice = ) gphoto or localphoto
-    # Then an if statement in the slot for mkframework checking photoChoice and setting photoAlbum
-
 
 class themeScroll(QWidget):
     def __init__ (self):
@@ -357,10 +348,18 @@ class mainWindow(QMainWindow):
         self.title = 'Ac.Io'
 
         if sys.platform == "linux" or sys.platform == "linux2":
-            self.key = "Ctrl"
+            self.system = "linux"
         elif sys.platform == "darwin":
-            self.key = "Cmnd"
+            self.system = "darwin"
         elif sys.platform == "win32" or sys.platform == "win64":
+            self.system = "windows"
+
+
+        if self.system == 'linux':
+            self.key = "Ctrl"
+        elif self.system == 'darwin':
+            self.key = "Cmnd"
+        elif self.system == 'windows':
             self.key = "Ctrl"
 
         self.createMenuBar()
