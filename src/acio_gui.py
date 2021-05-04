@@ -650,6 +650,10 @@ class mainWindow(QMainWindow):
 
                 self.statusBar().clearMessage()
                 self.statusBar().showMessage('Ready')
+
+            mkErr = "None!"
+            message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
+
         
 
 if __name__ == '__main__':
