@@ -18,7 +18,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Tutorial",
-        "excerpt":"If you would like to help beta test AcIo, please email Zach to recieve the application executables. If you are running AcIo on windows you will have to download Git for windows if you have not previously done so. You will also have to setup your login credentials differently from...","categories": [],
+        "excerpt":"Before starting If you would like to help beta test AcIo, please email Zach to recieve the application executables. If you are running AcIo on windows you will have to download Git for windows if you have not previously done so. You will also have to setup your login credentials...","categories": [],
         "tags": [],
         "url": "/tutorial/",
         "teaser": null
