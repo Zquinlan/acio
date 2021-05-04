@@ -3,11 +3,6 @@ content:
   url: "/about/"
 - title: Tutorial
   url: "/tutorial/"
-  children:
-    - title: Mac OS
-      url: "/tutorial/#mac-tutorial"
-    - title: Windows
-      url: "/tutorial/#windows-tutorial"
 - title: Updates
   url: "/update/"
 - title: issues

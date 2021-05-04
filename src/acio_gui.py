@@ -413,7 +413,7 @@ class mainWindow(QMainWindow):
     def initUI(self):
         # Setting Window Geometry
         self.setWindowTitle(self.title)
-        self.setGeometry(0, 0, 700, 600)
+        self.setGeometry(0, 0, 700, 650)
         self.statusBar().showMessage('Ready')
 
         #Defining scroll area

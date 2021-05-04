@@ -24,6 +24,7 @@ sidebar:
 <br /><br />
 ### GUI
 - Edit AcIO generated website option
+- README as optional argument
 - Add page option
 - Add posts option
 - Update image folder option
