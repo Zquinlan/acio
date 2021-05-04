@@ -11,12 +11,19 @@ classes: wide
 sidebar:
   nav: "content" 
 
+driveId: 8mO8iviTbnSqsqijYO9qERglhSOamnrC9dTaerVUYvHC-tES_xsnpSewOd4w1xqYemLwCy5OXElYLPIaTjRKodgDCESIkorE5A2-0Opv-GHeCbM-xDsaZk5ew1siZefJsfCBjj9ycmQ=w2400
 ---
+## Before starting
 If you would like to help beta test AcIo, please email [Zach](mailto:zquinlan@gmail.com) to recieve the application executables. 
 <br /><br />
 If you are running AcIo on windows you will have to download [Git for windows](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you have not previously done so. You will also have to setup your login credentials differently from the below instructions for osxkeychain. 
+<br /><br />
+If you have not already initialized the repository on github you will need to do that. There are many tutorials on how to do this already avialble such as this [one](https://kbroman.org/github_tutorial/pages/init.html)
 
 ## Tutorial:
+<br /><br />
+{% include googleDrivePlayer.html id=page.driveId %}
+<br /><br />
 ### Before starting verify that you have a Readme already in your repository. This will be used to build your landing page with AcIO. In future updates you will have the option to not use a readme if you prefer.
 
 - Open Terminal (or Command Line if using Windows)
