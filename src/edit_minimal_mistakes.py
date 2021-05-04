@@ -25,7 +25,7 @@ class editConfig():
                 config['logo'] = args['assetsLogo']
                 config['minimal_mistakes_skin'] = args['skin']
                 config['description'] = ''
-                config['baseurl'] = '{{ site.baseurl }}'
+                config['baseurl'] = '/'
 
                 config['author']['name'] = args['authorName']
                 config['author']['bio'] =  ''
