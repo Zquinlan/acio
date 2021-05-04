@@ -3,7 +3,7 @@ layout: single
 
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/about.jpg
+  overlay_image: /assets/images/tutorial.jpg
 excerpt: >
   AcIO Beta Updates: <br /><br /><br /><br />
 
