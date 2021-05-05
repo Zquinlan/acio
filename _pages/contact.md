@@ -7,7 +7,8 @@ header:
   overlay_color: "#5e616c"
   overlay_image: /assets/images/contact.png
 excerpt: >
-  Our lab <br /><br /><br /><br />
+  Reach out with any questions, suggestions or if you want to get involved!
+  <br /><br /><br /><br />
 
 sidebar:
     nav: 'content'
