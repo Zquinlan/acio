@@ -33,7 +33,7 @@ Coral reef biogeochemist and data scientist. I am pursuing my PhD to help save c
 <br />
 <br />
 
-![image-left]({{site.baseurl}}/assets/images/nick2021.jpg){: .alight-left}
+![image-left]({{site.baseurl}}/assets/images/Nick2021.jpeg){: .alight-left}
 ## Nick Quinlan
 Senior partner at Major League Hacking
 <a href="mailto:Nick@nicholasquinlan.com"><i class='far fa-envelope'></i> Email</a> 
