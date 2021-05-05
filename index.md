@@ -32,6 +32,7 @@ feature_row:
 ---
 
 {% include feature_row %}
+ AcIo could not have been made without the amazing jekyll themes which are freely available through github. If you feel so inclined take a gander at their [repo's](https://github.com/mmistakes/minimal-mistakes), maybe even buy them a coffee. 
 
 {% for post in site.posts limit: 5 %}
   {% include archive-single.html %}
