@@ -5,8 +5,10 @@ content:
   url: "/tutorial/"
 - title: Updates
   url: "/update/"
-- title: issues
+- title: Issues
   url: "/issues/"
+- title: Download
+  url: "/download/"
 - title: Contact
   url: "/contact/"
 
@@ -18,8 +20,10 @@ main:
   url: "/tutorial/"
 - title: Updates
   url: "/update/"
-- title: issues
+- title: Issues
   url: "/issues/"
+- title: Download
+  url: "/download/"
 - title: Contact
   url: "/contact/"
 
