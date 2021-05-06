@@ -12,7 +12,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Download",
-        "excerpt":"Most recent version:   beta v0.01: Download       release notes:     Release of AcIO Beta for Mac and Windows!        Prevoious Versions:  ","categories": [],
+        "excerpt":"Most recent version:   beta v0.01: Download     release notes:     Release of AcIO Beta for Mac and Windows!        Prevoious Versions:  ","categories": [],
         "tags": [],
         "url": "/download/",
         "teaser": null

@@ -14,10 +14,10 @@ sidebar:
 ---
 ## Most recent version:
 
-beta v0.01: [Download](https://github.com/Zquinlan/acio/suites/2652181588/artifacts/58307411){: .btn}
+### beta v0.01: <button type="button" onclick="https://github.com/Zquinlan/acio/suites/2652181588/artifacts/58307411">Download</button>
 
-<br /><br />
-### release notes:
+<br />
+**release notes:**
 - Release of AcIO Beta for Mac and Windows!
 
 
