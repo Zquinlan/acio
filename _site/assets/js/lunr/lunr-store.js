@@ -11,6 +11,12 @@ var store = [{
         "url": "/contact/",
         "teaser": null
       },{
+        "title": "Download",
+        "excerpt":"Most recent version:   beta v0.01: Download       release notes:     Release of AcIO Beta for Mac and Windows!        Prevoious Versions:  ","categories": [],
+        "tags": [],
+        "url": "/download/",
+        "teaser": null
+      },{
         "title": "Issues",
         "excerpt":"Reporting: Before sending in issues please check below for known issues! During BETA please report any issue you have directly to me. In the future I will transition over to the github issues page. Known Issues: Git clone works exceptionally slowly on Windows with specific graphics card. Especially if it...","categories": [],
         "tags": [],
