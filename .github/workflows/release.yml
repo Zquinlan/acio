@@ -37,7 +37,7 @@ jobs:
       run: |
         pyinstaller --onefile src/build.spec
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@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
       with:
         name: Acio
         path: dist
