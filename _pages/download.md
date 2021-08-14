@@ -14,7 +14,7 @@ sidebar:
 ---
 ## Most recent version:
 
-### beta v0.01: <button type="button" onclick="https://github.com/Zquinlan/acio/suites/2652181588/artifacts/58307411">Download</button>
+### beta v0.01: <button type="button" onclick="https://nightly.link/Zquinlan/acio/actions/artifacts/83431472.zip">Download</button>
 
 <br />
 **release notes:**
