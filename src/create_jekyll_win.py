@@ -24,19 +24,19 @@ class editThemeWin():
         #git status
         # if git status is not then git init
         # git checkout -B gh-pages
-        self.themeContents = str('(' + self.currentDirectory + '\\' + self.themeClone + '\\*)')
+        self.themeContents = str('(' + self.currentDirectory + '\\src\\' + self.themeClone + '\\*)')
         self.albumPath = str(self.currentDirectory + '\\assets\\images\\album\\')
         self.albumContents = str(self.currentDirectory + '\\assets\\images\\album\\' + os.path.basename(self.album))
         self.pathToApp = self.currentDirectory # change to some working version of this when bundling os.path.dirname(__path__)
 
         os.chdir(self.currentDirectory)
-        porcelain.clone(self.themeAddress, self.themeClone)
         
         self.moveThemeContents = str('for /d %d in ' + self.themeContents +' do move /Y %d ' + self.currentDirectory)
         self.moveThemeFiles = str('for %F in ' + self.themeContents +' do move /Y %F ' + self.currentDirectory)
         self.moveAlbum = str('for /d %d in ' + self.albumPath + ' do move /Y %d ' + self.albumContents)
         #removing files not used
 
+        subprocess.run('')
         subprocess.run('del /f minimal-mistakes\\README.md', shell = True) #This has to change so that it works with other themes
         subprocess.run(self.moveThemeContents, shell = True)
         subprocess.run(self.moveThemeFiles, shell = True)
