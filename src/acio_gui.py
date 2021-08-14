@@ -3,10 +3,12 @@ import qdarkstyle
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+
 # mac and linux scripts
 from edit_minimal_mistakes import*
 from create_jekyll import editTheme
 from create_md import editContents
+
 # Windows scripts
 from edit_minimal_mistakes_win import *
 from create_jekyll_win import editThemeWin
@@ -654,7 +656,7 @@ class mainWindow(QMainWindow):
             mkErr = "None!"
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
 
-        
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
