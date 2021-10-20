@@ -14,7 +14,9 @@ sidebar:
 ---
 ## Most recent version:
 
-### beta v0.01: <button type="button" onclick="https://nightly.link/Zquinlan/acio/actions/artifacts/83431472.zip">Download</button>
+### Mac beta v0.01: <button type="button" onclick="https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui">Download</button>
+
+### Windows beta v0.01: <button type="button" onclick="https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui.exe">Download</button>
 
 <br />
 **release notes:**
