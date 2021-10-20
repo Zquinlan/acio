@@ -15,10 +15,10 @@ sidebar:
 ## Most recent version:
 
 ### Mac beta v0.01:
-[button url="https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui"]
+[button {{ site.url }}/download/v0.01/acio_gui]
 
 ### Windows beta v0.01: 
-[button url="https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui.exe"]
+[button {{ site.url }}/download/v0.01/acio_gui.exe]
 
 <br />
 **release notes:**
