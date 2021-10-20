@@ -513,6 +513,7 @@ class mainWindow(QMainWindow):
              return os.path.join(sys._MEIPASS, relative_path)
          return os.path.join(os.path.abspath("."), relative_path)
 
+
         # Make website button
         acioIcon = QIcon(resource_path('Acio_design_v0.01.png'))
         self.mkFramework = QPushButton("Acio Website", self)
