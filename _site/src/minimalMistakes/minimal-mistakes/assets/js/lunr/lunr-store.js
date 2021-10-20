@@ -12,7 +12,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Download",
-        "excerpt":"Most recent version:   beta v0.01: Download     release notes:     Release of AcIO Beta for Mac and Windows!        Prevoious Versions:  ","categories": [],
+        "excerpt":"Most recent version:   Mac beta v0.01:  [button url=”https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui”]   Windows beta v0.01:  [button url=”https://github.com/Zquinlan/acio/raw/master/dist/v0.01/acio_gui.exe”]     release notes:     Release of AcIO Beta for Mac and Windows!        Prevoious Versions:  ","categories": [],
         "tags": [],
         "url": "/download/",
         "teaser": null
