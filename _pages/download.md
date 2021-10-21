@@ -14,11 +14,8 @@ sidebar:
 ---
 ## Most recent version:
 
-### Mac beta v0.01:
-[Download]({{ site.url }}/download/v0.01/acio_gui){: .btn}
-
-### Windows beta v0.01: 
-[Download]({{ site.url }}/download/v0.01/acio_gui.exe){: .btn}
+### Mac and window beta:
+[Download from github](https://github.com/Zquinlan/acio/releases){: .btn}
 
 <br />
 **release notes:**
