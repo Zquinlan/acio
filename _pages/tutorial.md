@@ -14,7 +14,7 @@ sidebar:
 driveId: 1AqqYoa9x8GcppPy_WnFjuQK3ECo0mlpE/preview
 ---
 ## Before starting
-If you would like to help beta test AcIo, please email [Zach](mailto:zquinlan@gmail.com) to recieve the application executables. 
+If you would like to help beta test AcIo it is available on the [download page]('https://zquinlan.github.io/acio/download). 
 <br /><br />
 If you are running AcIo on windows you will have to download [Git for windows](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you have not previously done so. You will also have to setup your login credentials differently from the below instructions for osxkeychain. 
 <br /><br />
