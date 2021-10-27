@@ -635,30 +635,38 @@ class mainWindow(QMainWindow):
         if os.path.isdir(currentDirectory): 
 
             if self.system == 'darwin' or self.system == 'linux':
-                self.mkcontent = editContents(args = configArgs)
+                try:
+                    self.mkcontent = editContents(args = configArgs)
 
-                self.statusBar().clearMessage()
-                self.statusBar().showMessage('Cloning website theme from Github')
-                self.mkClone = editTheme(args = configArgs)
-                self.mkConfig = editConfig(args = configArgs)
-                self.mkNavigation = editNavigation(args = configArgs)
-                self.mkAlbum = editPhotoAlbum(args = configArgs)
+                    self.statusBar().clearMessage()
+                    self.statusBar().showMessage('Cloning website theme from Github')
+                    self.mkClone = editTheme(args = configArgs)
+                    self.mkConfig = editConfig(args = configArgs)
+                    self.mkNavigation = editNavigation(args = configArgs)
+                    self.mkAlbum = editPhotoAlbum(args = configArgs)
 
-                self.statusBar().clearMessage()
-                self.statusBar().showMessage('Ready')
+                    self.statusBar().clearMessage()
+                    self.statusBar().showMessage('Ready')
+                    
+                except Exception as e:
+                    print e.message, e.args
 
             if self.system == 'windows':
-                self.mkcontent = editContentsWin(args = configArgs)
+                try:
+                    self.mkcontent = editContentsWin(args = configArgs)
 
-                self.statusBar().clearMessage()
-                self.statusBar().showMessage('Cloning website theme from Github')
-                self.mkClone = editThemeWin(args = configArgs)
-                self.mkConfig = editConfigWin(args = configArgs)
-                self.mkNavigation = editNavigationWin(args = configArgs)
-                self.mkAlbum = editPhotoAlbumWin(args = configArgs)
+                    self.statusBar().clearMessage()
+                    self.statusBar().showMessage('Cloning website theme from Github')
+                    self.mkClone = editThemeWin(args = configArgs)
+                    self.mkConfig = editConfigWin(args = configArgs)
+                    self.mkNavigation = editNavigationWin(args = configArgs)
+                    self.mkAlbum = editPhotoAlbumWin(args = configArgs)
 
-                self.statusBar().clearMessage()
-                self.statusBar().showMessage('Ready')
+                    self.statusBar().clearMessage()
+                    self.statusBar().showMessage('Ready')
+
+                except Exception as e:
+                    print e.message, e.args
 
             mkErr = "None!"
             message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
