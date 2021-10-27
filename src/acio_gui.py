@@ -625,6 +625,7 @@ class mainWindow(QMainWindow):
         self.doiNumber = self.doiLink.text()
 
         configArgs = {'currentDirectory' : currentDirectory, 'theme' : self.theme, 'skin' : self.skin, 'authorName' : self.authorLine.text(), 'title' : self.titleLine.text(), 'email' : self.emailHandle, 'repository' : self.dir.searchDirectory.text(), 'assetsSplash': self.assetsSplashLink, 'assetsLogo' : self.assetsLogoLink,  'assetsAvatar' : self.assetsAvatarLink, 'assetsAlbum': self.assetsAlbumLink, 'absoluteSplash' : self.absoluteSplashLink, 'absoluteLogo' : self.absoluteLogoLink,  'absoluteAvatar' : self.absoluteAvatarLink, 'absoluteAlbum': self.absoluteAlbumLink, 'personalWeb' : self.personalWeb, 'twitterHandle' : str('https://www.twitter.com/' + self.twitterHandle.strip('@')), 'researchgateHandle' : str('https://www.researchgate.net/profile/' + self.researchgateHandle), 'githubHandle' : str('https://github.com/' + self.githubHandle), 'orcidHandle' : str('https://orcid.org/' + self.orcidHandle), 'doi' : self.doiNumber} 
+        mkErr = "None!"
 
         # #Errors out if not directory is selected
         if not os.path.isdir(currentDirectory):
@@ -647,9 +648,10 @@ class mainWindow(QMainWindow):
 
                     self.statusBar().clearMessage()
                     self.statusBar().showMessage('Ready')
-                    
+
                 except Exception as e:
-                    print e.message, e.args
+                    message = QMessageBox.question(self, "Error: ", str(e), QMessageBox.Ok, QMessageBox.Ok)
+
 
             if self.system == 'windows':
                 try:
@@ -666,10 +668,10 @@ class mainWindow(QMainWindow):
                     self.statusBar().showMessage('Ready')
 
                 except Exception as e:
-                    print e.message, e.args
+                    message = QMessageBox.question(self, "Error: ", str(e), QMessageBox.Ok, QMessageBox.Ok)
 
-            mkErr = "None!"
-            message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
+            if mkErr == "None!":
+                message = QMessageBox.question(self, "Success!", "Framework Created!!", QMessageBox.Ok, QMessageBox.Ok)
 
 
 
