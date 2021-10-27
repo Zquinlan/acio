@@ -608,10 +608,16 @@ class mainWindow(QMainWindow):
         self.absoluteAlbumLink = self.localAlbumLink
         self.absoluteSplashLink = self.localSplashLink
 
-        self.assetsAvatarLink = str('assets/images/' + os.path.basename(self.absoluteAvatarLink))
-        self.assetsLogoLink = str('assets/images/' + os.path.basename(self.absoluteLogoLink))
-        self.assetsSplashLink = str('assets/images/' + os.path.basename(self.absoluteSplashLink))
-        # self.assetsAlbumLink = str('assets/images/' + os.path.basename(self.absoluteAlbumLink))
+        if self.system == 'darwin' or self.system == 'linux':
+            self.assetsAvatarLink = str('assets/images/' + os.path.basename(self.absoluteAvatarLink))
+            self.assetsLogoLink = str('assets/images/' + os.path.basename(self.absoluteLogoLink))
+            self.assetsSplashLink = str('assets/images/' + os.path.basename(self.absoluteSplashLink))
+
+        if self.system == 'windows':
+            self.assetsAvatarLink = str('assets\\images\\' + os.path.basename(self.absoluteAvatarLink))
+            self.assetsLogoLink = str('assets\\images\\' + os.path.basename(self.absoluteLogoLink))
+            self.assetsSplashLink = str('assets\\images\\' + os.path.basename(self.absoluteSplashLink))
+
         self.assetsAlbumLink = self.localAlbumLink
 
         self.theme = self.themeSelect.themeSelected

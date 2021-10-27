@@ -36,7 +36,6 @@ class editThemeWin():
         self.moveAlbum = str('for /d %d in ' + self.albumPath + ' do move /Y %d ' + self.albumContents)
         #removing files not used
 
-        subprocess.run('')
         subprocess.run('del /f minimal-mistakes\\README.md', shell = True) #This has to change so that it works with other themes
         subprocess.run(self.moveThemeContents, shell = True)
         subprocess.run(self.moveThemeFiles, shell = True)
