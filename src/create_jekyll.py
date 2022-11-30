@@ -52,15 +52,19 @@ class editTheme():
         subprocess.run(['mkdir', 'assets/images'])
         subprocess.run(['mkdir', 'assets/images/album'])
 
-        subprocess.run(['cp', self.logo, 'assets/images/'])
-        subprocess.run(['cp', self.avatar, 'assets/images/'])
-        subprocess.run(['cp', self.splash, 'assets/images/'])
+        if self.logo is not '':
+            subprocess.run(['cp', self.logo, 'assets/images/'])
+        if self.avatar is not '':
+            subprocess.run(['cp', self.avatar, 'assets/images/'])
+        if self.splash is not '':
+            subprocess.run(['cp', self.splash, 'assets/images/'])
         
-        subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
-        os.chdir(str('assets/images/album/' + os.path.basename(self.album)))
-        subprocess.run('mv * ..', shell = True)
-        os.chdir('../../../../')
-        subprocess.run(['rm', '-rf', str('assets/images/album/' + os.path.basename(self.album))])
+        if self.album is not '':
+            subprocess.run(['cp', '-R', self.album, 'assets/images/album/'])
+            os.chdir(str('assets/images/album/' + os.path.basename(self.album)))
+            subprocess.run('mv * ..', shell = True)
+            os.chdir('../../../..')
+            subprocess.run(['rm', '-rf', str('assets/images/album/' + os.path.basename(self.album))])
 
         subprocess.run(['mv', '_config.yml', '_config_template.yml'])
         subprocess.run(['mv', '_data/navigation.yml', '_data/navigation_template.yml'])
